@@ -212,7 +212,10 @@ svg.i{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke
 .mini-grid span.out{box-shadow:inset 0 0 0 3px var(--red)}
 
 /* ---------- listening strip (always on; Kivo answers only to its name) ---------- */
-.dock{margin:0 14px 14px;height:94px;border-radius:30px;background:var(--card-2);display:flex;align-items:center;gap:18px;padding:0 14px;flex:none;transition:background .3s,box-shadow .3s}
+.dock{margin:0 14px 14px;height:94px;border-radius:30px;background:var(--card-2);display:flex;align-items:center;gap:18px;padding:0 14px;flex:none;overflow:hidden;
+  transition:background .3s,box-shadow .3s,height .5s cubic-bezier(.6,0,.2,1),margin .5s cubic-bezier(.6,0,.2,1),opacity .3s}
+/* home stays clean: the strip only exists in the conversation view */
+.screen:not(.chat-mode) .dock{height:0;margin-bottom:0;opacity:0}
 .dock.active{background:#fff;box-shadow:inset 0 0 0 1.5px rgba(59,91,255,.2),0 10px 34px rgba(59,91,255,.16)}
 .dock-orb{width:66px;height:66px;flex:none;display:grid;place-items:center}
 .dock-orb .orb{--s:58px;transition:transform .45s cubic-bezier(.3,1.5,.5,1)}
