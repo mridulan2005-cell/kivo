@@ -229,7 +229,7 @@ body.tent-on #stage{opacity:0;pointer-events:none}
 .camt.bump{animation:flash .8s}
 .qr{flex:1;align-items:center;justify-content:center;gap:10px;transition:box-shadow .3s}
 .qr svg{width:190px;height:190px}
-.qr.live{box-shadow:0 0 0 4px var(--blue),0 14px 34px rgba(59,91,255,.28)}
+.qr.paying{box-shadow:0 0 0 4px var(--blue),0 14px 34px rgba(59,91,255,.28)}
 .qamt{font-size:36px;font-weight:700;color:var(--blue)}
 .txl{flex:1;gap:8px;overflow:hidden}
 .tr{display:flex;align-items:center;gap:12px;height:60px;border-radius:18px;background:var(--card-2);padding:0 16px 0 8px;flex:none}
@@ -254,6 +254,12 @@ body.tent-on #stage{opacity:0;pointer-events:none}
 .btn2 svg.prod{width:38px;height:38px}
 .btn2 svg.i{width:26px;height:26px}
 .btn2.k{background:var(--primary)} .btn2.u{background:var(--pinkbtn);color:#4A2A63} .btn2.d{background:var(--green)}
+
+body.capture #wiz,body.capture #sim,body.capture .pager{display:none!important}
+body.capture *,body.capture *::before,body.capture *::after{animation:none!important;transition:none!important}
+body.capture.tent-on #stage{display:none}
+body.capture .thread{scroll-behavior:auto}
+img.face{object-fit:cover;object-position:50% 18%;border-radius:24%;display:block;background:var(--card-3);flex:none}
 
 /* ---------- chat view ---------- */
 .ch-top{display:flex;align-items:center;gap:14px;margin-bottom:4px}
@@ -520,6 +526,7 @@ const prod=(n,cls='prod')=>`<svg class="${cls}" viewBox="${n==='truck'?'0 0 160 
 /* ---------------- illustrated faces (rounded squares, pastel bg like the reference) ---------------- */
 let fid=0;
 function face(c){
+  if(c.img)return `<img class="face" src="${c.img}" alt="" draggable="false">`;   // photo when we have one
   const id='f'+(fid++);
   const hair={
     short:'M20.5 27Q20 14.5 32 14.5Q44 14.5 43.5 27Q41 20 32 20Q24 20 20.5 27Z',
@@ -566,6 +573,9 @@ const PEOPLE={
   aai:{name:'Aai',owner:true,lang:'mr-IN',greet:'Namaskar, Aai',f:{bg:'#F4DDF3',skin:'#B97E58',hair:'#8C8C8C',style:'bun',shirt:'#1E9E6A',bindi:true}},
   rohan:{name:'Rohan',owner:false,lang:'hi-IN',greet:'Namaste, Rohan',f:{bg:'#D6F0FF',skin:'#B9774C',hair:'#141414',style:'spiky',shirt:'#6FA34A'}}  // son: sees everything, but not the owner
 };
+// photo-real portraits (AI-generated, not real people) in people/
+Object.entries(CUST).forEach(([k,c])=>c.img=`people/${k}.jpg`);
+Object.entries(PEOPLE).forEach(([k,p])=>p.f.img=`people/${k}.jpg`);
 const L=o=>o[cur]||(P().lang==='mr-IN'&&o.mr)||o.hi;   // line for the current person / language
 
 /* ---------------- moments (one at a time, most urgent first) ---------------- */
@@ -872,6 +882,7 @@ function credit(c){
     st.className='st gone';st.innerHTML=icon('undo');cue('undo');kivoSays(T({hi:'Hata diya.',mr:'Kadhun takla.'}))};
   el.querySelector('.e').onclick=showAlts;
   if(c.check){cue('warn');showAlts()}
+  if(c.hold!=null){paused=true;cd.setAttribute('stroke-dashoffset',(81.7*c.hold).toFixed(1))}   // frozen countdown (screen captures)
   return el;
 }
 function creditDone(key,amt){
@@ -1023,7 +1034,7 @@ function renderTent(){
     <div class="cmain"><div class="chead">${face(f)}<h2>${lbl('Namaste, '+name)}</h2></div>
     <div class="cgrid"><div class="ccol">
       <div class="ccard credit"><span class="clbl">${lbl('Udhaar')}</span><span class="camt${tent.fresh?' bump':''}">${fmt(bal)}</span></div>
-      <div class="ccard qr${tent.upi?' live':''}">${tent.upi?`<span class="qamt">${fmt(total)}</span>`:''}${qrSVG()}<span class="clbl">UPI</span></div>
+      <div class="ccard qr${tent.upi?' paying':''}">${tent.upi?`<span class="qamt">${fmt(total)}</span>`:''}${qrSVG()}<span class="clbl">UPI</span></div>
     </div><div class="ccard txl"><span class="clbl">${lbl('Lena-dena')}</span>${txRows(k,6)}</div></div></div>`;
   $('#ownScreen').innerHTML=`<nav class="crail"><div class="orb" data-orb="static" style="--s:50px"></div>
       <button class="nav active" id="tentHome" title="Home">${icon('home')}</button><button class="nav">${icon('chat')}</button><button class="nav">${icon('sliders')}</button>${face(P().f)}</nav>
@@ -1058,6 +1069,38 @@ function setTent(on,key){
   document.body.classList.toggle('tent-on',on);$('#tent').hidden=!on;
   document.querySelectorAll('#wizTent button').forEach(b=>b.classList.toggle('on',on?b.dataset.k===tent.key:b.dataset.k==='off'));
   if(on){renderTent();fit()}
+}
+
+/* ---------------- scenes: ?scene=name sets up one scenario exactly (for screen captures / Figma) ---------------- */
+function scene(name){
+  const as=k=>{cur=k;applyPerson()};
+  const chat=()=>{setMode('chat');addDivider('3:06 pm');nowDivider=true};
+  const said=i=>addUser(cur,T(SCRIPTS[i].said));
+  const S={
+    'home-away':()=>{as('sandeep');showMoment(0,false)},
+    'home-list':()=>{as('sandeep');awayLog.length=0;showMoment(0,false)},
+    'home-truck':()=>{as('sandeep');awayLog.length=0;showMoment(1,false)},
+    'home-joshi':()=>{as('sandeep');awayLog.length=0;showMoment(2,false)},
+    'home-aai':()=>{as('aai');showMoment(0,false)},
+    'home-rohan':()=>{as('rohan');showMoment(0,false)},
+    'chat-listening':()=>{as('sandeep');chat();const b=addUser(cur,'',true).querySelector('.bubble');
+      const t=tx(T(SCRIPTS[0].said)).split(' ').slice(0,5).join(' ');b.textContent=t;setVoice('listening','dock');$('#dLine').textContent=t},
+    'chat-credit':()=>{as('sandeep');chat();said(0);addKivo(creditLine('Patil sahab',200),credit({key:'patil',amt:200,alts:[250,2000],hold:.45}));setVoice('speaking','dock');$('#dLine').textContent=tx(creditLine('Patil sahab',200))},
+    'chat-credit-fix':()=>{as('sandeep');chat();said(0);addKivo(creditLine('Patil sahab',200),credit({key:'patil',amt:200,alts:[250,2000],hold:.3}));
+      setTimeout(()=>document.querySelector('.rc.credit .e').click(),50)},
+    'chat-misheard':()=>{as('sandeep');chat();said(3);addKivo(T({hi:'Verma ji, ₹50? Sahi hai?',mr:''}),credit({key:'verma',amt:50,alts:[15,500],hint:15,check:true}))},
+    'chat-sharma':()=>{as('sandeep');chat();said(1);addKivo(T(SCRIPTS[1].reply),SCRIPTS[1].card())},
+    'chat-rohan-check':()=>{as('rohan');chat();said(5);addKivo(T(SCRIPTS[5].reply),SCRIPTS[5].card())},
+    'chat-restock':()=>{as('sandeep');chat();said(2);addKivo(T(SCRIPTS[2].reply),SCRIPTS[2].card())},
+    'panel-khata':()=>{as('sandeep');setMode('khata')},
+    'panel-restock':()=>{as('sandeep');setMode('restock')},
+    'panel-tx':()=>{as('sandeep');setMode('tx')},
+    'tent':()=>{as('sandeep');setTent(true,'patil')},
+    'tent-upi':()=>{as('sandeep');setTent(true,'patil');tent.upi=true;renderTent()},
+    'tent-khata':()=>{as('sandeep');setTent(true,'patil');$('#toKhata').click()}
+  };
+  (S[name]||S['home-away'])();
+  setTimeout(()=>thread.scrollTop=thread.scrollHeight,400);
 }
 
 /* ---------------- wire up ---------------- */
@@ -1108,12 +1151,15 @@ function init(){
   applyPerson();showMoment(0,false);
   fit();addEventListener('resize',fit);
   requestAnimationFrame(frame);
-  setTimeout(()=>switchPerson('sandeep'),900);
+  const sc=new URLSearchParams(location.search).get('scene');
+  if(sc){document.body.classList.add('capture');sound=false;fit();scene(sc)}
+  else setTimeout(()=>switchPerson('sandeep'),900);
 }
 function fit(){
   // keep a gutter on both sides for the presenter controls that live outside the device
-  const s=Math.min((innerWidth-240)/920,(innerHeight-24)/1160);device.style.transform=`translate(-50%,-50%) scale(${s})`;
-  const t=Math.min((innerWidth-300)/2060,(innerHeight-40)/700);$('#tent').style.transform=`translate(-50%,-50%) scale(${t})`;
+  const cap=document.body.classList.contains('capture');
+  const s=cap?1:Math.min((innerWidth-240)/920,(innerHeight-24)/1160);device.style.transform=`translate(-50%,-50%) scale(${s})`;
+  const t=cap?1:Math.min((innerWidth-300)/2060,(innerHeight-40)/700);$('#tent').style.transform=`translate(-50%,-50%) scale(${t})`;
 }
 init();
 </script>
