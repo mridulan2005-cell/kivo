@@ -469,7 +469,7 @@ body.tent-on #stage{opacity:0;pointer-events:none}
  </div>
 </div>
 
-<script src="voice/lines.js"></script>
+<script src="voice/lines.js?v=3"></script>
 <script>
 /* ---------------- line icons ---------------- */
 const ICONS={
@@ -593,7 +593,7 @@ const BASE_MOMENTS=[
 // Everything Rohan (not the owner) does is remembered; the owner sees it first when they come back.
 const awayLog=[];
 const AWAY={id:'away',urgent:true,bg:'var(--lav)',thumb:()=>face(PEOPLE.rohan.f),
-  line:{hi:'Sandeep, aapke peeche **Rohan** ne kuch kaam kiye. Ek baar dekh lo.',aai:'Aai, tumchya maage **Rohan**ne kahi kaama keli. Ek da baghun ghya.'},
+  line:{hi:'Sandeep, aapke na rehte dukaan mein **kya-kya hua**, ek nazar dekh lijiye.',aai:'Aai, tumhi nastana dukanaat **kay-kay jhala**, ekda baghun ghya.'},
   stage:()=>`<div class="srow">${face(PEOPLE.rohan.f)}<span class="time">${awayLog.length}</span></div>
     <div class="away">${awayLog.slice(-4).map(e=>`<div class="aw">${e.vis}<span class="aw-amt">${e.amt||''}</span><span class="aw-ic">${e.ic}</span></div>`).join('')}</div>`,
   act:()=>({icon:'check',label:L({hi:'Dekh liya',mr:'Baghitla'})})};
@@ -651,8 +651,8 @@ const DEV={
   'Gupta ka truck 4:30 baje aayega. Maal gin lena.':'**गुप्ता** का ट्रक **4:30** बजे आएगा। माल गिन लेना।',
   'Joshi ji ka saamaan pack hai. 5 baje lene aayenge.':'**जोशी जी** का सामान पैक है। **5 बजे** लेने आएँगे।',
   'Joshi jincha saamaan tayar aahe. 5 vajta yetil.':'**जोशी जीं**चं सामान तयार आहे. **5 वाजता** येतील.',
-  'Sandeep, aapke peeche Rohan ne kuch kaam kiye. Ek baar dekh lo.':'संदीप, आपके पीछे **रोहन** ने कुछ काम किए। एक बार देख लो।',
-  'Aai, tumchya maage Rohanne kahi kaama keli. Ek da baghun ghya.':'आई, तुमच्या मागे **रोहन**ने काही कामं केली. एकदा बघून घ्या.',
+  'Sandeep, aapke na rehte dukaan mein kya-kya hua, ek nazar dekh lijiye.':'संदीप, आपके न रहते दुकान में **क्या-क्या हुआ**, एक नज़र देख लीजिए।',
+  'Aai, tumhi nastana dukanaat kay-kay jhala, ekda baghun ghya.':'आई, तुम्ही नसताना दुकानात **काय-काय झालं**, एकदा बघून घ्या.',
   'Kaunse Sharma ji?':'कौन से शर्मा जी?','Konte Sharma ji?':'कोणते शर्मा जी?','Order mein daal diya.':'ऑर्डर में डाल दिया।','Order madhe takla.':'ऑर्डरमध्ये टाकलं.',
   'Yeh rahi.':'ये रही।','Hi ghya.':'ही घ्या.','Hata diya.':'हटा दिया।','Kadhun takla.':'काढून टाकलं.','Haan, de sakte ho.':'हाँ, दे सकते हो।','Ho, deu shakto.':'हो, देऊ शकतो.',
   'Jod diya.':'जोड़ दिया।','Joshi ji ko bata diya.':'जोशी जी को बता दिया।','Nondavla.':'नोंदवलं.',

@@ -41,15 +41,15 @@ window.VOICE_LINES={
   "lang": "mr",
   "text": "जोशी जींचं सामान तयार आहे. पाच वाजता येतील."
  },
- "Sandeep, aapke peeche Rohan ne kuch kaam kiye. Ek baar dekh lo.": {
+ "Sandeep, aapke na rehte dukaan mein kya-kya hua, ek nazar dekh lijiye.": {
   "id": "away-hi",
   "lang": "hi",
-  "text": "संदीप, आपके पीछे रोहन ने कुछ काम किए। एक बार देख लो।"
+  "text": "संदीप, आपके न रहते दुकान में क्या-क्या हुआ, एक नज़र देख लीजिए।"
  },
- "Aai, tumchya maage Rohanne kahi kaama keli. Ek da baghun ghya.": {
+ "Aai, tumhi nastana dukanaat kay-kay jhala, ekda baghun ghya.": {
   "id": "away-mr",
   "lang": "mr",
-  "text": "आई, तुमच्या मागे रोहनने काही कामं केली. एकदा बघून घ्या."
+  "text": "आई, तुम्ही नसताना दुकानात काय-काय झालं, एकदा बघून घ्या."
  },
  "Ho gaya": {
   "id": "done-hi",
