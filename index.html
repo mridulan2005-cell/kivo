@@ -143,7 +143,11 @@ svg.i{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke
 .act.done{background:var(--green)}
 .act.done .ai{color:var(--green)}
 
-.pager{display:flex;justify-content:center;gap:16px}
+/* moment switcher: presenter-only, outside the device (on the device Kivo decides what to show) */
+.pager{position:fixed;right:30px;top:14px;z-index:100;display:flex;flex-direction:column;align-items:center;gap:16px;padding:14px 12px;border-radius:24px;
+  background:rgba(255,255,255,.72);backdrop-filter:blur(14px);box-shadow:0 8px 30px rgba(16,24,40,.12);transition:opacity .3s}
+.pager::before{content:"Moments";font-size:11px;font-weight:600;color:var(--ink-3);letter-spacing:.06em}
+.pager.hidden,body.tent-on .pager{opacity:0;pointer-events:none}
 .pg{width:64px;height:64px;border-radius:20px;border:0;padding:0;background:var(--card-2);display:grid;place-items:center;position:relative;transition:transform .25s,box-shadow .25s,opacity .25s;opacity:.5}
 .pg.on{opacity:1;box-shadow:0 0 0 3px #fff,0 0 0 6px var(--primary);transform:scale(1.06)}
 .pg .face{width:64px;height:64px}
@@ -397,6 +401,8 @@ body.tent-on #stage{opacity:0;pointer-events:none}
   <div class="tside"><div class="tlabel">Owner side</div><div class="ldev"><div class="lscreen" id="ownScreen"></div></div></div>
 </div>
 
+<div class="pager" id="pager" title="Presenter only: jump to a moment"></div>
+
 <div id="stage">
  <div id="device" data-voice="idle">
   <div class="screen" id="screen">
@@ -437,7 +443,6 @@ body.tent-on #stage{opacity:0;pointer-events:none}
               <button class="replay" id="replay" title="Phir se suno"><span data-i="vol"></span></button>
             </div>
             <div class="stagebox" id="stagebox"></div>
-            <div class="pager" id="pager"></div>
             <div class="wake"><div class="orb" data-orb="static" style="--s:30px"></div><span data-src="Bolo “Kivo…”"></span></div>
           </div>
 
@@ -1092,7 +1097,7 @@ function init(){
   document.addEventListener('keydown',e=>{
     if(e.code==='Space'){e.preventDefault();runScript(SCRIPTS[0])}
     else if(e.key==='Escape')setMode('home');
-    else if(e.key==='h'||e.key==='H'){$('#wiz').classList.toggle('hidden');$('#sim').classList.toggle('hidden')}
+    else if(e.key==='h'||e.key==='H'){$('#wiz').classList.toggle('hidden');$('#sim').classList.toggle('hidden');$('#pager').classList.toggle('hidden')}
     else if(e.key==='b'||e.key==='B')chatter();
     else if(e.key==='t'||e.key==='T')setTent(!tent.on);
     else if(e.key==='l'||e.key==='L')replay();
