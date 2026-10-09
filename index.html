@@ -195,6 +195,60 @@ svg.i{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke
 .rc.check{box-shadow:inset 0 0 0 3px var(--amber),0 8px 22px rgba(232,146,0,.18)}
 .rc.check .cd{stroke:var(--amber)}
 
+/* ---------- tent mode: device folded, one screen each way ---------- */
+#tent{position:fixed;left:50%;top:50%;display:flex;gap:60px;transition:opacity .4s}
+#tent[hidden]{display:none}
+body.tent-on #stage{opacity:0;pointer-events:none}
+#stage{transition:opacity .4s}
+.tside{display:flex;flex-direction:column;align-items:center}
+.tlabel{font-size:22px;font-weight:600;color:var(--ink-3);margin-bottom:16px;letter-spacing:.02em}
+.ldev{width:1000px;height:640px;border-radius:48px;padding:18px;position:relative;
+  background:linear-gradient(150deg,#FFFFFF 0%,#ECEEF3 38%,#D3D7E0 100%);box-shadow:0 40px 80px rgba(20,25,60,.18),0 10px 20px rgba(20,25,60,.08),inset 0 1px 0 #fff}
+.ldev::before{content:"";position:absolute;top:6px;left:50%;width:7px;height:7px;margin-left:-3.5px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#5a6070,#14161b)}
+.lscreen{width:100%;height:100%;border-radius:32px;background:var(--screen);display:flex;gap:16px;padding:16px;overflow:hidden}
+.crail{width:84px;flex:none;background:var(--rail);border-radius:26px;display:flex;flex-direction:column;align-items:center;padding:18px 0;gap:12px}
+.crail .face{margin-top:auto;width:56px;height:56px;border-radius:18px;box-shadow:0 0 0 3px var(--rail),0 0 0 5.5px #5BE3A0}
+.crail .nav{width:54px;height:54px}
+.cmain{flex:1;min-width:0;display:flex;flex-direction:column;gap:14px}
+.chead{display:flex;align-items:center;gap:14px;height:60px;flex:none}
+.chead .face{width:58px;height:58px}
+.chead h2{margin:0;font-size:31px;font-weight:700;letter-spacing:-.01em}
+.live{margin-left:auto;display:flex;align-items:center;gap:8px;height:46px;padding:0 16px;border-radius:16px;background:var(--mint);font-size:17px;font-weight:600;color:#08784A}
+.cgrid{flex:1;min-height:0;display:grid;grid-template-columns:1fr 1.1fr;gap:14px}
+.ccol{display:flex;flex-direction:column;gap:14px;min-height:0}
+.ccard{background:#fff;border-radius:26px;padding:16px 20px;box-shadow:var(--shadow);display:flex;flex-direction:column;min-height:0}
+.ccard.credit{background:var(--pink);flex:none}
+.clbl{font-size:19px;font-weight:600;color:var(--ink-2)}
+.camt{font-size:54px;font-weight:600;letter-spacing:-.03em;line-height:1.1;margin-top:4px;transition:color .3s}
+.camt.bump{animation:flash .8s}
+.qr{flex:1;align-items:center;justify-content:center;gap:10px;transition:box-shadow .3s}
+.qr svg{width:190px;height:190px}
+.qr.live{box-shadow:0 0 0 4px var(--blue),0 14px 34px rgba(59,91,255,.28)}
+.qamt{font-size:36px;font-weight:700;color:var(--blue)}
+.txl{flex:1;gap:8px;overflow:hidden}
+.tr{display:flex;align-items:center;gap:12px;height:60px;border-radius:18px;background:var(--card-2);padding:0 16px 0 8px;flex:none}
+.tr svg.prod{width:44px;height:44px}
+.tr .pi{width:44px;height:44px;display:grid;place-items:center;color:var(--blue)}
+.tr .pi svg.i{width:26px;height:26px}
+.td{width:60px;font-size:17px;font-weight:600;color:var(--ink-3)}
+.ta{margin-left:auto;font-size:23px;font-weight:600;display:flex;align-items:center;gap:8px}
+.ta.pay{color:var(--green)}
+.ta svg.i{width:20px;height:20px;color:var(--green);stroke-width:3}
+.tr.new{animation:newrow 1.8s ease-out}
+@keyframes newrow{0%{background:var(--butter);transform:scale(1.03)}100%{background:var(--card-2)}}
+.bill{flex:1}
+.br{display:flex;align-items:center;gap:12px;height:56px}
+.br svg.prod{width:48px;height:48px}
+.bq{font-size:18px;font-weight:600;color:var(--ink-3)}
+.bp{margin-left:auto;font-size:21px;font-weight:600}
+.btot{display:flex;justify-content:space-between;align-items:center;font-size:28px;font-weight:700;border-top:2px dashed var(--card-3);padding-top:10px;margin-top:6px}
+.bacts{display:flex;gap:10px;margin-top:auto;padding-top:12px}
+.btn2{flex:1;height:62px;border:0;border-radius:20px;display:flex;align-items:center;justify-content:center;gap:10px;font-size:20px;font-weight:700;color:#fff;transition:transform .2s}
+.btn2:active{transform:scale(.97)}
+.btn2 svg.prod{width:38px;height:38px}
+.btn2 svg.i{width:26px;height:26px}
+.btn2.k{background:var(--ink)} .btn2.u{background:var(--blue)} .btn2.d{background:var(--green)}
+
 /* ---------- chat view ---------- */
 .ch-top{display:flex;align-items:center;gap:14px;margin-bottom:4px}
 .back{width:52px;height:52px;border-radius:18px;border:0;background:var(--card-2);display:grid;place-items:center}
@@ -322,15 +376,23 @@ svg.i{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke
   <div>Counter pe kaun hai (face match)</div>
   <div class="row" id="wizPeople"></div>
   <div class="row"><button id="wizCallout">Replay (L)</button><button id="wizNext">Next moment (N)</button><button id="wizSound">Sound: on</button><button id="wizLipi">Lipi: देवनागरी</button></div>
+  <div>Grahak counter pe (tent mode, T)</div>
+  <div class="row" id="wizTent"></div>
   <div>Kivo ne kya suna</div>
   <div id="wizCmds" style="display:flex;flex-direction:column;gap:5px"></div>
   <div class="note">Space = someone says “Kivo…” · B = background talk (Kivo hears, stays quiet) · Esc = home. Command 4 plants a mishearing (15 heard as 50); Kivo asks instead of saving. Commands said while Kivo is busy are queued.</div>
 </div>
 
 <div id="sim" title="Presenter only, not part of the device">
+  <button id="simTent" title="Customer at the counter: fold into tent mode (T)" style="width:52px;height:52px;background:#fff;color:var(--ink-2)"><span data-i="tent"></span></button>
   <button id="simChat" title="Background baat-cheet (no wake word)"><span data-i="chat"></span></button>
   <button id="simMic" title="Simulate someone saying “Kivo…” (Space)"><span data-i="mic"></span></button>
   <span>Say “Kivo…”</span>
+</div>
+
+<div id="tent" hidden>
+  <div class="tside"><div class="tlabel">Customer side</div><div class="ldev"><div class="lscreen" id="custScreen"></div></div></div>
+  <div class="tside"><div class="tlabel">Owner side</div><div class="ldev"><div class="lscreen" id="ownScreen"></div></div></div>
 </div>
 
 <div id="stage">
@@ -423,7 +485,9 @@ const ICONS={
   mic:'<rect x="9" y="2" width="6" height="12" rx="3"/><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v3"/>',
   building:'<rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4M8 6h.01M16 6h.01M12 6h.01M12 10h.01M12 14h.01M16 10h.01M16 14h.01M8 10h.01M8 14h.01"/>',
   cross:'<path d="M9 3h6v6h6v6h-6v6H9v-6H3V9h6z"/>',
-  phone:'<rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M11 18h2"/>'
+  phone:'<rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M11 18h2"/>',
+  tent:'<path d="M3 20 12 4l9 16"/><path d="M2 20h20M12 4v16"/>',
+  eye:'<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>'
 };
 const icon=n=>`<svg class="i" viewBox="0 0 24 24">${ICONS[n]}</svg>`;
 
@@ -570,7 +634,7 @@ const DEV={
   'Sandeep':'संदीप','Aai':'आई','Rohan':'रोहन','Patil sahab':'पाटिल साहब','Verma ji':'वर्मा जी','Sharma ji':'शर्मा जी','Yogesh bhau':'योगेश भाऊ',
   'Joshi ji':'जोशी जी','Kulkarni kaku':'कुलकर्णी काकू','Priya madam':'प्रिया मैडम','Doodh':'दूध','Maggi':'मैगी',
   'Re-Stock':'माल मंगाना','Transactions':'आज का हिसाब','Khata':'खाता','Aaj':'आज','Baaki':'बाकी','Undo':'वापस','Badlo':'बदलो',
-  'Kal 10:00':'कल 10:00','1 tareekh':'1 तारीख','Bolo “Kivo…”':'बोलिए “कीवो…”','Ek second…':'एक सेकंड…','bill':'बिल',
+  'Kal 10:00':'कल 10:00','Udhaar':'उधार','Lena-dena':'लेन-देन','Saamaan':'सामान','Kul':'कुल','Khate mein':'खाते में','Ho gaya ✓':'हो गया ✓','Grahak dekh rahe hain':'ग्राहक देख रहे हैं','1 tareekh':'1 तारीख','Bolo “Kivo…”':'बोलिए “कीवो…”','Ek second…':'एक सेकंड…','bill':'बिल',
   'Chawal mangwao':'चावल मंगवाओ','Tandul maagva':'तांदूळ मागवा','Theek hai':'ठीक है','Barobar':'बरोबर','Ho gaya':'हो गया','Jhala':'झालं','Dekh liya':'देख लिया','Baghitla':'बघितलं',
   'Sandeep, Priya madam ne kal ke liye list bheji hai. Chawal naya laana hai.':'संदीप, **प्रिया मैडम** ने **कल** के लिए लिस्ट भेजी है। **चावल** नया लाना है।',
   'Aai, Priya madamni udya sathi yaadi pathavli aahe. Tandul aanave lagtil.':'आई, **प्रिया मॅडमनी** **उद्या**साठी यादी पाठवली आहे. **तांदूळ** आणावे लागतील.',
@@ -599,6 +663,7 @@ function tx(str){
   const k=str.replace(/\*\*/g,'').trim();
   if(DEV[k])return DEV[k];
   let m;
+  if(m=k.match(/^Namaste, (.+)$/))return `नमस्ते, ${tx(m[1])}`;
   if(m=k.match(/^(.+), (₹[\d,]+) udhaar add kiya\.$/))return `${tx(m[1])}, ${m[2]} उधार ऐड किया।`;
   if(m=k.match(/^(.+), (₹[\d,]+) udhaari lihili\.$/))return `${tx(m[1])}, ${m[2]} उधारी लिहिली.`;
   if(m=k.match(/^(.+), (₹[\d,]+)\? Sahi hai\?$/))return `${tx(m[1])}, ${m[2]}? सही है?`;
@@ -763,7 +828,7 @@ function applyPerson(){
   $('#dLine').textContent=tx(T(SCRIPTS[0].said));
 }
 async function switchPerson(k){
-  cur=k;applyPerson();toast(face(P().f),tx(P().name));
+  cur=k;applyPerson();toast(face(P().f),tx(P().name));if(tent.on)renderTent();
   const first=M().findIndex(x=>!done.has(x.id));
   showMoment(first<0?0:first,false);
   if(mode==='home'){await sleep(800);speakMoment()}
@@ -783,7 +848,7 @@ function credit(c){
   let amt=c.amt,left=5,paused=false,fin=false;
   const cd=el.querySelector('.cd'),st=el.querySelector('.st'),a=el.querySelector('.alts');
   const confirm=()=>{fin=true;clearInterval(iv);el.classList.remove('check');el.classList.add('confirmed');a.hidden=true;st.outerHTML=okMark();cue('ok');
-    LEDGER[c.key]=prev+amt;
+    LEDGER[c.key]=prev+amt;(TXNS[c.key]=TXNS[c.key]||[]).unshift({d:'Aaj',amt,p:'bag'});
     if(!PEOPLE[who].owner)awayLog.push({vis:face(f),amt:'+'+fmt(amt),ic:prod('khata')})};
   const iv=setInterval(()=>{if(paused||fin)return;left-=.1;cd.setAttribute('stroke-dashoffset',(81.7*(1-left/5)).toFixed(1));if(left<=0)confirm()},100);
   const showAlts=()=>{
@@ -916,6 +981,78 @@ async function chatter(){
   if(voice==='passive')setVoice('idle');busy=false;
 }
 
+/* ---------------- tent mode: customer side + owner side, nothing spoken ---------------- */
+const TXNS={
+  patil:[{d:'5/10',amt:450,p:'dal'},{d:'1/10',amt:-800,pay:'cash'},{d:'28/9',amt:600,p:'ghee'},{d:'20/9',amt:400,p:'biscuit'},{d:'12/9',amt:-500,pay:'upi'}],
+  yogesh:[{d:'Aaj',amt:340,p:'noodles'},{d:'1/10',amt:-1500,pay:'cash'},{d:'24/9',amt:520,p:'rice'},{d:'15/9',amt:660,p:'ghee'},{d:'1/9',amt:-1200,pay:'cash'}],
+  verma:[{d:'7/10',amt:60,p:'milk'},{d:'4/10',amt:60,p:'milk'},{d:'1/10',amt:-180,pay:'upi'}],
+  priya:[{d:'6/10',amt:450,p:'haldi'},{d:'25/9',amt:-900,pay:'upi'},{d:'18/9',amt:900,p:'rice'}],
+  sharmaB:[{d:'3/10',amt:820,p:'soap'},{d:'20/9',amt:-400,pay:'cash'}]
+};
+const BILL=[['rice','5 kg',320],['dal','1 kg',140],['ghee','1 L',560]];
+const tent={on:false,key:'patil',upi:false,done:false,fresh:false};
+let QR='';
+function qrSVG(){
+  if(QR)return QR;
+  let seed=7;const rnd=()=>(seed=(seed*9301+49297)%233280)/233280;
+  const N=25,cells=[];
+  const finder=(x,y)=>{cells.push(`<rect x="${x}" y="${y}" width="7" height="7"/><rect x="${x+1}" y="${y+1}" width="5" height="5" fill="#fff"/><rect x="${x+2}" y="${y+2}" width="3" height="3"/>`)};
+  const inFinder=(x,y)=>(x<8&&y<8)||(x>N-9&&y<8)||(x<8&&y>N-9);
+  for(let y=0;y<N;y++)for(let x=0;x<N;x++)if(!inFinder(x,y)&&rnd()>.52)cells.push(`<rect x="${x}" y="${y}" width="1" height="1"/>`);
+  finder(0,0);finder(N-7,0);finder(0,N-7);
+  return QR=`<svg viewBox="-1 -1 ${N+2} ${N+2}" shape-rendering="crispEdges"><rect x="-1" y="-1" width="${N+2}" height="${N+2}" fill="#fff"/><g fill="#14172B">${cells.join('')}</g></svg>`;
+}
+const billTotal=()=>BILL.reduce((n,b)=>n+b[2],0);
+function txRows(key,n){
+  return (TXNS[key]||[]).slice(0,n).map((t,i)=>{
+    const vis=t.p?prod(t.p):`<span class="pi">${t.pay==='upi'?icon('phone'):prod('cash')}</span>`;
+    const amt=t.paid?`${fmt(t.amt)}${icon('check')}`:(t.amt<0?'−':'+')+fmt(Math.abs(t.amt));
+    return `<div class="tr${i===0&&tent.fresh?' new':''}"><span class="td">${t.d==='Aaj'?tx('Aaj'):t.d}</span>${vis}<span class="ta${t.amt<0||t.paid?' pay':''}">${amt}</span></div>`;
+  }).join('');
+}
+function renderTent(){
+  const k=tent.key,f=CUST[k],name=CNAME[k],bal=LEDGER[k]||0,total=billTotal();
+  $('#custScreen').innerHTML=`<div class="crail"><div class="orb" data-orb="static" style="--s:50px"></div>${face(P().f)}</div>
+    <div class="cmain"><div class="chead">${face(f)}<h2>${lbl('Namaste, '+name)}</h2></div>
+    <div class="cgrid"><div class="ccol">
+      <div class="ccard credit"><span class="clbl">${lbl('Udhaar')}</span><span class="camt${tent.fresh?' bump':''}">${fmt(bal)}</span></div>
+      <div class="ccard qr${tent.upi?' live':''}">${tent.upi?`<span class="qamt">${fmt(total)}</span>`:''}${qrSVG()}<span class="clbl">UPI</span></div>
+    </div><div class="ccard txl"><span class="clbl">${lbl('Lena-dena')}</span>${txRows(k,6)}</div></div></div>`;
+  $('#ownScreen').innerHTML=`<nav class="crail"><div class="orb" data-orb="static" style="--s:50px"></div>
+      <button class="nav active" id="tentHome" title="Home">${icon('home')}</button><button class="nav">${icon('chat')}</button><button class="nav">${icon('sliders')}</button>${face(P().f)}</nav>
+    <div class="cmain"><div class="chead">${face(f)}<h2>${lbl(name)}</h2><span class="live">${icon('eye')}${lbl('Grahak dekh rahe hain')}</span></div>
+    <div class="cgrid"><div class="ccol">
+      <div class="ccard credit"><span class="clbl">${lbl('Udhaar')}</span><span class="camt${tent.fresh?' bump':''}" style="font-size:46px">${fmt(bal)}</span></div>
+      <div class="ccard bill"><span class="clbl">${lbl('Saamaan')}</span>
+        ${BILL.map(([p,q,r])=>`<div class="br">${prod(p)}<span class="bq">${q}</span><span class="bp">${fmt(r)}</span></div>`).join('')}
+        <div class="btot"><span>${lbl('Kul')}</span><span>${fmt(total)}</span></div>
+        <div class="bacts">${tent.done?`<button class="btn2 d" id="newBill">${icon('check')}${lbl('Ho gaya ✓')}</button>`
+          :`<button class="btn2 k" id="toKhata">${prod('khata')}${lbl('Khate mein')}</button><button class="btn2 u" id="toUpi">${icon('phone')}UPI</button>`}</div>
+      </div>
+    </div><div class="ccard txl"><span class="clbl">${lbl('Lena-dena')}</span>${txRows(k,6)}</div></div></div>`;
+  document.querySelectorAll('#tent [data-orb=static]').forEach(e=>makeOrb(e,{live:false}));
+  $('#tentHome').onclick=()=>setTent(false);
+  if(tent.done){$('#newBill').onclick=()=>{tent.done=false;tent.fresh=false;renderTent()};return}
+  $('#toKhata').onclick=()=>{               // bill goes on the customer's khata: both screens update, Kivo stays silent
+    LEDGER[k]=bal+total;TXNS[k]=TXNS[k]||[];TXNS[k].unshift({d:'Aaj',amt:total,p:BILL[0][0]});
+    if(!P().owner)awayLog.push({vis:face(f),amt:'+'+fmt(total),ic:prod('khata')});
+    tent.done=true;tent.fresh=true;cue('ok');renderTent();
+  };
+  $('#toUpi').onclick=async()=>{            // customer scans their side; payment lands a few seconds later
+    tent.upi=true;tent.fresh=false;renderTent();cue('listen');
+    await sleep(3500);if(!tent.on||!tent.upi)return;
+    TXNS[k]=TXNS[k]||[];TXNS[k].unshift({d:'Aaj',amt:total,p:BILL[0][0],paid:true});
+    tent.upi=false;tent.done=true;tent.fresh=true;cue('ok');renderTent();
+  };
+}
+function setTent(on,key){
+  if(key&&key!==tent.key){tent.key=key;tent.done=false;tent.upi=false}
+  tent.on=on;tent.fresh=false;
+  document.body.classList.toggle('tent-on',on);$('#tent').hidden=!on;
+  document.querySelectorAll('#wizTent button').forEach(b=>b.classList.toggle('on',on?b.dataset.k===tent.key:b.dataset.k==='off'));
+  if(on){renderTent();fit()}
+}
+
 /* ---------------- wire up ---------------- */
 function init(){
   document.querySelectorAll('[data-i]').forEach(el=>el.insertAdjacentHTML('afterbegin',icon(el.dataset.i)));
@@ -935,6 +1072,9 @@ function init(){
   $('#wizCallout').onclick=replay;$('#wizNext').onclick=next;
   const toggleSound=()=>{sound=!sound;$('#wizSound').textContent='Sound: '+(sound?'on':'off');
     const sb=$('#soundBtn');sb.classList.toggle('on',sound);sb.innerHTML=icon(sound?'vol':'volx');if(sound)cue('ok')};
+  $('#wizTent').innerHTML=['patil','yogesh','verma','priya','sharmaB'].map(k=>`<button data-k="${k}">${CNAME[k]}${k==='sharmaB'?' (B)':''}</button>`).join('')+'<button data-k="off" class="on">Off</button>';
+  $('#wizTent').onclick=e=>{const b=e.target.closest('button');if(b)b.dataset.k==='off'?setTent(false):setTent(true,b.dataset.k)};
+  $('#simTent').onclick=()=>setTent(!tent.on);
   $('#wizSound').onclick=toggleSound;$('#soundBtn').onclick=toggleSound;
 
   $('#pager').onclick=e=>{const b=e.target.closest('.pg');if(b)showMoment(+b.dataset.m)};
@@ -943,7 +1083,7 @@ function init(){
   $('#back').onclick=()=>setMode('home');$('#back2').onclick=()=>setMode('home');
   $('#qaRestock').onclick=()=>setMode('restock');$('#qaTx').onclick=()=>setMode('tx');$('#qaKhata').onclick=()=>setMode('khata');
   $('#wizLipi').onclick=()=>{lipi=lipi==='dev'?'roman':'dev';$('#wizLipi').textContent='Lipi: '+(lipi==='dev'?'देवनागरी':'Roman');
-    retranslate();applyPerson();renderMoment();document.querySelectorAll('#sayText .w').forEach(w=>w.classList.add('on'));if(PANELS[mode])setMode(mode)};
+    retranslate();applyPerson();renderMoment();if(tent.on)renderTent();document.querySelectorAll('#sayText .w').forEach(w=>w.classList.add('on'));if(PANELS[mode])setMode(mode)};
   $('#who').onclick=()=>{const ks=Object.keys(PEOPLE);switchPerson(ks[(ks.indexOf(cur)+1)%ks.length])};
   document.querySelectorAll('.nav').forEach(n=>n.onclick=()=>{const k=n.dataset.nav;if(k==='home'||k==='chat')setMode(k)});
   
@@ -952,6 +1092,7 @@ function init(){
     else if(e.key==='Escape')setMode('home');
     else if(e.key==='h'||e.key==='H'){$('#wiz').classList.toggle('hidden');$('#sim').classList.toggle('hidden')}
     else if(e.key==='b'||e.key==='B')chatter();
+    else if(e.key==='t'||e.key==='T')setTent(!tent.on);
     else if(e.key==='l'||e.key==='L')replay();
     else if(e.key==='n'||e.key==='N')next();
     else{const s=SCRIPTS.find(s=>s.key===e.key);if(s)runScript(s)}
@@ -964,7 +1105,9 @@ function init(){
 }
 function fit(){
   // keep a gutter on both sides for the presenter controls that live outside the device
-  const s=Math.min((innerWidth-240)/920,(innerHeight-24)/1160);device.style.transform=`translate(-50%,-50%) scale(${s})`}
+  const s=Math.min((innerWidth-240)/920,(innerHeight-24)/1160);device.style.transform=`translate(-50%,-50%) scale(${s})`;
+  const t=Math.min((innerWidth-300)/2060,(innerHeight-40)/700);$('#tent').style.transform=`translate(-50%,-50%) scale(${t})`;
+}
 init();
 </script>
 </body>
