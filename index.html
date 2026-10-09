@@ -63,7 +63,7 @@ svg.i{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke
 .main{flex:1;min-width:0;display:flex;flex-direction:column}
 .top{display:flex;flex-direction:column;gap:16px;max-height:260px;margin-bottom:16px;overflow:hidden;
   transition:max-height .55s cubic-bezier(.6,0,.2,1),opacity .35s,margin .55s cubic-bezier(.6,0,.2,1)}
-.chat-mode .top{max-height:0;opacity:0;margin-bottom:0}
+.full .top{max-height:0;opacity:0;margin-bottom:0}
 .hdr{display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 4px}
 .hdr h1{margin:0;font-size:30px;font-weight:700;letter-spacing:-.01em}
 .hdr-r{display:flex;align-items:center;gap:10px}
@@ -81,7 +81,6 @@ svg.i{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke
 .qa .pic{position:absolute;right:-8px;bottom:-12px;width:132px;height:132px;transform:rotate(-6deg)}
 .qa .pic svg{width:100%;height:100%}
 .qa .deco{position:absolute;right:-40px;top:-40px;width:150px;height:150px;border-radius:50%;background:rgba(255,255,255,.45)}
-.qa .lock{position:absolute;left:22px;bottom:20px;width:42px;height:42px;border-radius:14px;background:rgba(255,255,255,.7);display:grid;place-items:center;color:var(--ink-2)}
 
 /* ---------- contextual window ---------- */
 .ctx{flex:1;min-height:0;background:var(--card);border-radius:32px;box-shadow:var(--shadow);position:relative;display:flex;flex-direction:column;overflow:hidden}
@@ -89,8 +88,10 @@ svg.i{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke
 .view{position:absolute;inset:0;display:flex;flex-direction:column;transition:opacity .4s,transform .5s cubic-bezier(.6,0,.2,1)}
 .view-home{padding:22px 22px 12px;gap:18px}
 .view-chat{padding:16px 18px 6px;opacity:0;pointer-events:none;transform:translateY(16px)}
-.chat-mode .view-home{opacity:0;pointer-events:none;transform:scale(.98)}
-.chat-mode .view-chat{opacity:1;pointer-events:auto;transform:none}
+.full .view-home{opacity:0;pointer-events:none;transform:scale(.98)}
+.mode-chat .view-chat{opacity:1;pointer-events:auto;transform:none}
+.view-panel{padding:16px 18px 18px;opacity:0;pointer-events:none;transform:translateY(16px)}
+.mode-panel .view-panel{opacity:1;pointer-events:auto;transform:none}
 
 /* one moment at a time */
 .say{display:flex;gap:20px;align-items:center;min-height:96px}
@@ -149,6 +150,50 @@ svg.i{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke
 .pg .dot{position:absolute;top:-4px;right:-4px;width:18px;height:18px;border-radius:50%;background:var(--red);border:3px solid #fff}
 .pg .ck{position:absolute;bottom:-5px;right:-5px;width:26px;height:26px;border-radius:50%;background:var(--green);color:#fff;display:grid;place-items:center;border:3px solid #fff}
 .pg .ck svg.i{width:13px;height:13px;stroke-width:3.4}
+
+/* while-you-were-away list */
+.away{flex:1;min-height:0;display:flex;flex-direction:column;gap:10px;overflow:hidden}
+.aw{background:#fff;border-radius:22px;display:flex;align-items:center;gap:18px;padding:8px 18px 8px 8px;height:70px;flex:none;animation:rise .4s both}
+.aw .face,.aw>svg.prod{width:54px;height:54px}
+.aw>svg.prod{background:var(--peach);border-radius:20px;padding:6px}
+.aw-amt{font-size:28px;font-weight:600;letter-spacing:-.02em}
+.aw-ic{margin-left:auto;width:52px;height:52px;display:grid;place-items:center}
+.aw-ic svg.prod{width:48px;height:48px}
+.aw-ic svg.i{width:30px;height:30px;color:var(--wa)}
+
+/* wake-word hint on home */
+.wake{display:flex;align-items:center;justify-content:center;gap:10px;font-size:19px;font-weight:500;color:var(--ink-3);margin-top:-6px}
+
+/* panels opened from quick actions */
+.panel-body{flex:1;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:16px;padding:6px 2px}
+.panel-body::-webkit-scrollbar{width:0}
+.total{display:flex;align-items:center;gap:16px;padding:16px 20px;border-radius:26px;font-size:40px;font-weight:600;letter-spacing:-.02em}
+.total svg.prod{width:64px;height:64px}
+.kgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.kc{background:var(--card-2);border-radius:24px;padding:16px 10px;display:flex;flex-direction:column;align-items:center;gap:6px}
+.kc .face{width:80px;height:80px}
+.kc .kn{font-size:18px;font-weight:600}
+.kc .kb{font-size:26px;font-weight:600;letter-spacing:-.02em}
+.sup{background:var(--card-2);border-radius:26px;padding:16px}
+.sup-h{display:flex;align-items:center;gap:12px;font-size:20px;font-weight:600;margin-bottom:12px}
+.sup-h svg.prod{width:64px;height:40px}
+.sup-row{display:flex;gap:12px;flex-wrap:wrap}
+.sup-row span{width:110px;height:120px;background:#fff;border-radius:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:18px;font-weight:600;color:var(--ink-2)}
+.sup-row svg.prod{width:72px;height:72px}
+.txg{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.txc{border-radius:26px;padding:18px;display:flex;flex-direction:column;gap:10px;font-size:32px;font-weight:600}
+.txc svg.prod{width:70px;height:70px}
+.txc svg.i{width:56px;height:56px;color:var(--blue)}
+
+/* credit check + uncertain amount */
+.verdict{margin-left:auto;width:58px;height:58px;border-radius:18px;display:grid;place-items:center;color:#fff}
+.verdict svg.i{width:30px;height:30px;stroke-width:3}
+.verdict.ok{background:var(--green)} .verdict.ask{background:var(--amber)}
+.facts2{display:flex;gap:10px;margin-top:12px}
+.facts2 span{flex:1;display:flex;align-items:center;gap:10px;background:var(--card-2);border-radius:16px;padding:8px 12px;font-size:20px;font-weight:600}
+.facts2 svg.prod{width:42px;height:42px}
+.rc.check{box-shadow:inset 0 0 0 3px var(--amber),0 8px 22px rgba(232,146,0,.18)}
+.rc.check .cd{stroke:var(--amber)}
 
 /* ---------- chat view ---------- */
 .ch-top{display:flex;align-items:center;gap:14px;margin-bottom:4px}
@@ -215,7 +260,7 @@ svg.i{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke
 .dock{margin:0 14px 14px;height:94px;border-radius:30px;background:var(--card-2);display:flex;align-items:center;gap:18px;padding:0 14px;flex:none;overflow:hidden;
   transition:background .3s,box-shadow .3s,height .5s cubic-bezier(.6,0,.2,1),margin .5s cubic-bezier(.6,0,.2,1),opacity .3s}
 /* home stays clean: the strip only exists in the conversation view */
-.screen:not(.chat-mode) .dock{height:0;margin-bottom:0;opacity:0}
+.screen:not(.mode-chat) .dock{height:0;margin-bottom:0;opacity:0}
 .dock.active{background:#fff;box-shadow:inset 0 0 0 1.5px rgba(59,91,255,.2),0 10px 34px rgba(59,91,255,.16)}
 .dock-orb{width:66px;height:66px;flex:none;display:grid;place-items:center}
 .dock-orb .orb{--s:58px;transition:transform .45s cubic-bezier(.3,1.5,.5,1)}
@@ -276,10 +321,10 @@ svg.i{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke
   <div class="wt"><span>WIZARD · PRESENTER</span><span>H to hide</span></div>
   <div>Counter pe kaun hai (face match)</div>
   <div class="row" id="wizPeople"></div>
-  <div class="row"><button id="wizCallout">Replay (L)</button><button id="wizNext">Next moment (N)</button><button id="wizSound">Sound: on</button></div>
+  <div class="row"><button id="wizCallout">Replay (L)</button><button id="wizNext">Next moment (N)</button><button id="wizSound">Sound: on</button><button id="wizLipi">Lipi: देवनागरी</button></div>
   <div>Kivo ne kya suna</div>
   <div id="wizCmds" style="display:flex;flex-direction:column;gap:5px"></div>
-  <div class="note">Space = someone says “Kivo…” · B = background talk (Kivo hears, stays quiet) · Esc = home. Command 4 plants a mishearing (15 heard as 50).</div>
+  <div class="note">Space = someone says “Kivo…” · B = background talk (Kivo hears, stays quiet) · Esc = home. Command 4 plants a mishearing (15 heard as 50); Kivo asks instead of saving. Commands said while Kivo is busy are queued.</div>
 </div>
 
 <div id="sim" title="Presenter only, not part of the device">
@@ -313,9 +358,9 @@ svg.i{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke
           </div>
         </header>
         <section class="qa">
-          <button id="qaRestock" style="background:var(--peach)"><span class="deco"></span>Re-Stock<span class="pic" data-p="box"></span></button>
-          <button id="qaTx" style="background:var(--mint)"><span class="deco"></span>Transactions<span class="pic" data-p="cash"></span></button>
-          <button id="qaKhata" style="background:var(--pink)"><span class="deco"></span>Khata<span class="pic" data-p="khata"></span><span class="lock" id="khataLock" hidden></span></button>
+          <button id="qaRestock" style="background:var(--peach)"><span class="deco"></span><b data-src="Re-Stock"></b><span class="pic" data-p="box"></span></button>
+          <button id="qaTx" style="background:var(--mint)"><span class="deco"></span><b data-src="Transactions"></b><span class="pic" data-p="cash"></span></button>
+          <button id="qaKhata" style="background:var(--pink)"><span class="deco"></span><b data-src="Khata"></b><span class="pic" data-p="khata"></span></button>
         </section>
       </div>
 
@@ -329,11 +374,17 @@ svg.i{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke
             </div>
             <div class="stagebox" id="stagebox"></div>
             <div class="pager" id="pager"></div>
+            <div class="wake"><div class="orb" data-orb="static" style="--s:30px"></div><span data-src="Bolo “Kivo…”"></span></div>
           </div>
 
           <div class="view view-chat">
-            <div class="ch-top"><button class="back" id="back"><span data-i="chev"></span></button><span class="ttl">Aaj</span></div>
+            <div class="ch-top"><button class="back" id="back"><span data-i="chev"></span></button><span class="ttl" data-src="Aaj"></span></div>
             <div class="thread" id="thread"></div>
+          </div>
+
+          <div class="view view-panel">
+            <div class="ch-top"><button class="back" id="back2"><span data-i="chev"></span></button><span class="ttl" id="panelTtl"></span></div>
+            <div class="panel-body" id="panelBody"></div>
           </div>
         </div>
 
@@ -371,7 +422,8 @@ const ICONS={
   chev:'<path d="m15 18-6-6 6-6"/>',
   mic:'<rect x="9" y="2" width="6" height="12" rx="3"/><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v3"/>',
   building:'<rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4M8 6h.01M16 6h.01M12 6h.01M12 10h.01M12 14h.01M16 10h.01M16 14h.01M8 10h.01M8 14h.01"/>',
-  cross:'<path d="M9 3h6v6h6v6h-6v6H9v-6H3V9h6z"/>'
+  cross:'<path d="M9 3h6v6h6v6h-6v6H9v-6H3V9h6z"/>',
+  phone:'<rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M11 18h2"/>'
 };
 const icon=n=>`<svg class="i" viewBox="0 0 24 24">${ICONS[n]}</svg>`;
 
@@ -429,32 +481,37 @@ const CUST={
   sharmaM:{bg:'#FFEDB8',skin:'#BF865C',hair:'#222',style:'short',shirt:'#FFFFFF',mustache:true},
   verma:{bg:'#E4DCFF',skin:'#A86E48',hair:'#2A2A2A',style:'short',shirt:'#3F9C6D'},
   joshi:{bg:'#D3F3E2',skin:'#D6A27A',hair:'#666',style:'bald',shirt:'#F4B740',glasses:true},
+  yogesh:{bg:'#FFE9B8',skin:'#B8683F',hair:'#1A1A1A',style:'short',shirt:'#F5B82E',mustache:true},
   kulkarni:{bg:'#FFDCD6',skin:'#C48A63',hair:'#7A7A7A',style:'bun',shirt:'#8E5BD9',bindi:true}
 };
+
+const CNAME={patil:'Patil sahab',yogesh:'Yogesh bhau',sharmaB:'Sharma ji',sharmaM:'Sharma ji',verma:'Verma ji',priya:'Priya madam',kulkarni:'Kulkarni kaku',joshi:'Joshi ji'};
+const LEDGER={patil:1250,yogesh:1180,sharmaB:820,priya:450,verma:120,sharmaM:0,kulkarni:0,joshi:0};
+const RESTOCK=[{p:'rice',q:'×4',sup:'Ramesh Traders'},{p:'dal',q:'×2',sup:'Ramesh Traders'},{p:'biscuit',q:'×6',sup:'Gupta Distributors'},{p:'soap',q:'×3',sup:'Gupta Distributors'},{p:'salt',q:'×4',sup:'Gupta Distributors'}];
 
 /* ---------------- people at the counter ---------------- */
 const PEOPLE={
   sandeep:{name:'Sandeep',owner:true,lang:'hi-IN',greet:'Namaste, Sandeep',f:{bg:'#FFE1C7',skin:'#C08457',hair:'#1B1410',style:'short',shirt:'#3B5BFF',mustache:true}},
   aai:{name:'Aai',owner:true,lang:'mr-IN',greet:'Namaskar, Aai',f:{bg:'#F4DDF3',skin:'#B97E58',hair:'#8C8C8C',style:'bun',shirt:'#1E9E6A',bindi:true}},
-  ravi:{name:'Ravi',owner:false,lang:'hi-IN',greet:'Namaste, Ravi',f:{bg:'#D6F0FF',skin:'#A9704A',hair:'#141414',style:'spiky',shirt:'#F08A24'}}
+  rohan:{name:'Rohan',owner:false,lang:'hi-IN',greet:'Namaste, Rohan',f:{bg:'#D6F0FF',skin:'#B9774C',hair:'#141414',style:'spiky',shirt:'#6FA34A'}}  // son: sees everything, but not the owner
 };
 const L=o=>o[cur]||(P().lang==='mr-IN'&&o.mr)||o.hi;   // line for the current person / language
 
 /* ---------------- moments (one at a time, most urgent first) ---------------- */
 const LIST=[['rice','5 kg','out'],['dal','2 kg','ok'],['ghee','1 L','ok'],['noodles','12','low'],['soap','1 kg','ok'],['biscuit','6','ok'],['haldi','200 g','ok'],['salt','2 kg','ok']];
-const MOMENTS=[
+const BASE_MOMENTS=[
   {id:'list',urgent:true,bg:'var(--pink)',thumb:()=>face(CUST.priya),
    line:{sandeep:'Sandeep, **Priya madam** ne **kal** ke liye list bheji hai. **Chawal** naya laana hai.',
          aai:'Aai, **Priya madamni** **udya** sathi yaadi pathavli aahe. **Tandul** aanave lagtil.',
-         ravi:'Ravi, **Priya madam** ka saamaan **kal 10 baje** tak pack karna hai.'},
-   stage:()=>`<div class="srow"><span class="app">${face(CUST.priya)}<span class="wab">${icon('wa')}</span></span><span class="time">${icon('clock')}Kal 10:00</span></div>
+         rohan:'Rohan, **Priya madam** ka saamaan **kal 10 baje** tak pack karna hai.'},
+   stage:()=>`<div class="srow"><span class="app">${face(CUST.priya)}<span class="wab">${icon('wa')}</span></span><span class="time">${icon('clock')}${tx('Kal 10:00')}</span></div>
      <div class="grid">${LIST.map(([p,q,s])=>`<div class="pt ${s}">${prod(p)}<span class="q">${q}</span><span class="b">${icon(s==='ok'?'check':s==='out'?'x':'minus')}</span></div>`).join('')}</div>`,
-   act:()=>P().owner?{pic:'rice',label:L({hi:'Chawal mangwao',mr:'Tandul maagva'})}:{pic:'bag',label:'Packing shuru'}},
+   act:()=>({pic:'rice',label:L({hi:'Chawal mangwao',mr:'Tandul maagva'})})},
   {id:'truck',bg:'var(--butter)',thumb:()=>prod('truck'),
-   line:{hi:'**Gupta** ka truck **4:30** baje aayega. Paise taiyaar rakho.',mr:'**Gupta**chi gaadi **4:30** la yeil. Paise tayar theva.',ravi:'**Gupta** ka truck **4:30** baje aayega. Maal gin lena.'},
+   line:{hi:'**Gupta** ka truck **4:30** baje aayega. Paise taiyaar rakho.',mr:'**Gupta**chi gaadi **4:30** la yeil. Paise tayar theva.',rohan:'**Gupta** ka truck **4:30** baje aayega. Maal gin lena.'},
    stage:()=>`<div class="hero">${prod('truck','prod truck')}<div class="facts">
      <div class="fact"><span class="fi">${icon('clock')}</span>4:30</div>
-     ${P().owner?`<div class="fact"><span class="fi">${prod('cash')}</span>₹3,200</div>`:`<div class="fact"><span class="fi">${prod('box')}</span>6</div>`}</div></div>`,
+     <div class="fact"><span class="fi">${prod('cash')}</span>₹3,200</div></div></div>`,
    act:()=>({icon:'check',label:L({hi:'Theek hai',mr:'Barobar'})})},
   {id:'joshi',bg:'var(--mint)',thumb:()=>face(CUST.joshi),
    line:{hi:'**Joshi ji** ka saamaan pack hai. **5 baje** lene aayenge.',mr:'**Joshi ji**ncha saamaan tayar aahe. **5 vajta** yetil.'},
@@ -462,23 +519,36 @@ const MOMENTS=[
    act:()=>({icon:'check',label:L({hi:'Theek hai',mr:'Barobar'})})}
 ];
 
+// Everything Rohan (not the owner) does is remembered; the owner sees it first when they come back.
+const awayLog=[];
+const AWAY={id:'away',urgent:true,bg:'var(--lav)',thumb:()=>face(PEOPLE.rohan.f),
+  line:{hi:'Sandeep, aapke peeche **Rohan** ne kuch kaam kiye. Ek baar dekh lo.',aai:'Aai, tumchya maage **Rohan**ne kahi kaama keli. Ek da baghun ghya.'},
+  stage:()=>`<div class="srow">${face(PEOPLE.rohan.f)}<span class="time">${awayLog.length}</span></div>
+    <div class="away">${awayLog.slice(-4).map(e=>`<div class="aw">${e.vis}<span class="aw-amt">${e.amt||''}</span><span class="aw-ic">${e.ic}</span></div>`).join('')}</div>`,
+  act:()=>({icon:'check',label:L({hi:'Dekh liya',mr:'Baghitla'})})};
+const M=()=>(P().owner&&awayLog.length?[AWAY]:[]).concat(BASE_MOMENTS);
+
 /* ---------------- chat scripts (wizard decides what Kivo heard) ---------------- */
 const SCRIPTS=[
   {key:'1',label:'Patil sahab, ₹200 udhaar',said:{hi:'Kivo, Patil sahab ke khate mein 200 add karo',mr:'Kivo, Patil sahebanchya khatyat 200 taka'},
-   reply:{hi:'Likh liya.',mr:'Lihun ghetla.'},card:()=>credit({f:CUST.patil,name:'Patil sahab',amt:200,prev:1250,alts:[250,2000]})},
+   reply:()=>creditLine('Patil sahab',200),card:()=>credit({key:'patil',amt:200,alts:[250,2000]})},
   {key:'2',label:'Sharma ji, 340 udhaar',said:{hi:'Kivo, Sharma ji, 340 udhaar',mr:'Kivo, Sharma ji, 340 udhaari'},
    reply:{hi:'Kaunse Sharma ji?',mr:'Konte Sharma ji?'},
-   card:()=>disambig(340,[{f:CUST.sharmaB,name:'Sharma ji',ic:'building',tag:'Building B',prev:820},{f:CUST.sharmaM,name:'Sharma ji',ic:'cross',tag:'Medical',prev:0}])},
+   card:()=>disambig(340,[{key:'sharmaB',ic:'building',tag:'Building B'},{key:'sharmaM',ic:'cross',tag:'Medical'}])},
   {key:'3',label:'Maggi khatam',said:{hi:'Kivo, Maggi khatam ho gayi',mr:'Kivo, Maggi sampli'},
-   reply:{hi:'Order mein daal diya.',mr:'Order madhe takla.'},card:()=>itemCard('noodles','Maggi','×2')},
+   reply:{hi:'Order mein daal diya.',mr:'Order madhe takla.'},card:()=>{RESTOCK.push({p:'noodles',q:'×2',sup:'Gupta Distributors'});return itemCard('noodles','Maggi','×2')},
+   log:()=>({vis:prod('noodles'),amt:'×2',ic:prod('box')})},
   {key:'4',label:'Verma ji, 15 udhaar (planted 50)',said:{hi:'Kivo, Verma ji, pandrah rupaye udhaar',mr:'Kivo, Verma ji, pandhra rupaye udhaari'},
-   reply:{hi:'Likh liya.',mr:'Lihun ghetla.'},card:()=>credit({f:CUST.verma,name:'Verma ji',amt:50,prev:120,alts:[15,500],hint:15})},
+   reply:()=>T({hi:'Verma ji, ₹50? Sahi hai?',mr:'Verma ji, ₹50? Barobar aahe?'}),card:()=>credit({key:'verma',amt:50,alts:[15,500],hint:15,check:true})},
   {key:'5',label:'Priya madam ki list',said:{hi:'Kivo, Priya madam ki list dikhao',mr:'Kivo, Priya madamchi yaadi dakhav'},
-   reply:{hi:'Yeh rahi.',mr:'Hi ghya.'},card:()=>listCard()}
+   reply:{hi:'Yeh rahi.',mr:'Hi ghya.'},card:()=>listCard()},
+  {key:'6',label:'Yogesh ko udhaar de sakte? (credit check)',said:{hi:'Kivo, Yogesh bhau ko udhaar de sakte hain?',mr:'Kivo, Yogesh bhau la udhaari deu ka?'},
+   reply:{hi:'Haan, de sakte ho.',mr:'Ho, deu shakto.'},card:()=>creditCheck('yogesh',true)}
 ];
 const HISTORY=[
   {div:'9:12 am'},{who:'sandeep',text:'Kivo, Amul doodh ke 40 packet aaye'},{kivo:'Jod diya.',card:()=>itemCard('milk','Doodh','+40')},
-  {div:'11:40 am'},{who:'ravi',text:'Joshi ji ka order pack ho gaya'},{kivo:'Joshi ji ko bata diya.',card:()=>personCard(CUST.joshi,'Joshi ji','wa')},
+  {div:'11:40 am'},{who:'rohan',text:'Joshi ji ka order pack ho gaya'},{kivo:'Joshi ji ko bata diya.',card:()=>personCard(CUST.joshi,'Joshi ji','wa')},
+  {who:'rohan',text:'Kivo, Yogesh bhau ke khate mein 340 likho'},{kivo:'Yogesh bhau, ₹340 udhaar add kiya.',card:()=>creditDone('yogesh',340)},
   {div:'1:15 pm'},{who:'aai',text:'Kivo, Kulkarni kakunni 500 dile'},{kivo:'Nondavla.',card:()=>payCard(CUST.kulkarni,'Kulkarni kaku',500)}
 ];
 
@@ -491,6 +561,53 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const fmt=n=>'₹'+n.toLocaleString('en-IN');
 const P=()=>PEOPLE[cur];
 const T=o=>(P().lang==='mr-IN'&&o.mr)||o.hi;
+const creditLine=(name,amt)=>T({hi:`${name}, ${fmt(amt)} udhaar add kiya.`,mr:`${name}, ${fmt(amt)} udhaari lihili.`});
+
+/* ---------------- lipi: on-screen text in Devanagari (default) or Roman ---------------- */
+let lipi='dev';
+const DEV={
+  'Namaste, Sandeep':'नमस्ते, संदीप','Namaskar, Aai':'नमस्कार, आई','Namaste, Rohan':'नमस्ते, रोहन',
+  'Sandeep':'संदीप','Aai':'आई','Rohan':'रोहन','Patil sahab':'पाटिल साहब','Verma ji':'वर्मा जी','Sharma ji':'शर्मा जी','Yogesh bhau':'योगेश भाऊ',
+  'Joshi ji':'जोशी जी','Kulkarni kaku':'कुलकर्णी काकू','Priya madam':'प्रिया मैडम','Doodh':'दूध','Maggi':'मैगी',
+  'Re-Stock':'माल मंगाना','Transactions':'आज का हिसाब','Khata':'खाता','Aaj':'आज','Baaki':'बाकी','Undo':'वापस','Badlo':'बदलो',
+  'Kal 10:00':'कल 10:00','1 tareekh':'1 तारीख','Bolo “Kivo…”':'बोलिए “कीवो…”','Ek second…':'एक सेकंड…','bill':'बिल',
+  'Chawal mangwao':'चावल मंगवाओ','Tandul maagva':'तांदूळ मागवा','Theek hai':'ठीक है','Barobar':'बरोबर','Ho gaya':'हो गया','Jhala':'झालं','Dekh liya':'देख लिया','Baghitla':'बघितलं',
+  'Sandeep, Priya madam ne kal ke liye list bheji hai. Chawal naya laana hai.':'संदीप, **प्रिया मैडम** ने **कल** के लिए लिस्ट भेजी है। **चावल** नया लाना है।',
+  'Aai, Priya madamni udya sathi yaadi pathavli aahe. Tandul aanave lagtil.':'आई, **प्रिया मॅडमनी** **उद्या**साठी यादी पाठवली आहे. **तांदूळ** आणावे लागतील.',
+  'Rohan, Priya madam ka saamaan kal 10 baje tak pack karna hai.':'रोहन, **प्रिया मैडम** का सामान **कल 10 बजे** तक पैक करना है।',
+  'Gupta ka truck 4:30 baje aayega. Paise taiyaar rakho.':'**गुप्ता** का ट्रक **4:30** बजे आएगा। पैसे तैयार रखो।',
+  'Guptachi gaadi 4:30 la yeil. Paise tayar theva.':'**गुप्ता**ची गाडी **4:30** ला येईल. पैसे तयार ठेवा.',
+  'Gupta ka truck 4:30 baje aayega. Maal gin lena.':'**गुप्ता** का ट्रक **4:30** बजे आएगा। माल गिन लेना।',
+  'Joshi ji ka saamaan pack hai. 5 baje lene aayenge.':'**जोशी जी** का सामान पैक है। **5 बजे** लेने आएँगे।',
+  'Joshi jincha saamaan tayar aahe. 5 vajta yetil.':'**जोशी जीं**चं सामान तयार आहे. **5 वाजता** येतील.',
+  'Sandeep, aapke peeche Rohan ne kuch kaam kiye. Ek baar dekh lo.':'संदीप, आपके पीछे **रोहन** ने कुछ काम किए। एक बार देख लो।',
+  'Aai, tumchya maage Rohanne kahi kaama keli. Ek da baghun ghya.':'आई, तुमच्या मागे **रोहन**ने काही कामं केली. एकदा बघून घ्या.',
+  'Kaunse Sharma ji?':'कौन से शर्मा जी?','Konte Sharma ji?':'कोणते शर्मा जी?','Order mein daal diya.':'ऑर्डर में डाल दिया।','Order madhe takla.':'ऑर्डरमध्ये टाकलं.',
+  'Yeh rahi.':'ये रही।','Hi ghya.':'ही घ्या.','Hata diya.':'हटा दिया।','Kadhun takla.':'काढून टाकलं.','Haan, de sakte ho.':'हाँ, दे सकते हो।','Ho, deu shakto.':'हो, देऊ शकतो.',
+  'Jod diya.':'जोड़ दिया।','Joshi ji ko bata diya.':'जोशी जी को बता दिया।','Nondavla.':'नोंदवलं.',
+  'Kivo, Patil sahab ke khate mein 200 add karo':'कीवो, पाटिल साहब के खाते में 200 ऐड करो','Kivo, Patil sahebanchya khatyat 200 taka':'कीवो, पाटील साहेबांच्या खात्यात 200 टाका',
+  'Kivo, Sharma ji, 340 udhaar':'कीवो, शर्मा जी, 340 उधार','Kivo, Sharma ji, 340 udhaari':'कीवो, शर्मा जी, 340 उधारी',
+  'Kivo, Maggi khatam ho gayi':'कीवो, मैगी खत्म हो गई','Kivo, Maggi sampli':'कीवो, मॅगी संपली',
+  'Kivo, Verma ji, pandrah rupaye udhaar':'कीवो, वर्मा जी, पंद्रह रुपये उधार','Kivo, Verma ji, pandhra rupaye udhaari':'कीवो, वर्मा जी, पंधरा रुपये उधारी',
+  'Kivo, Priya madam ki list dikhao':'कीवो, प्रिया मैडम की लिस्ट दिखाओ','Kivo, Priya madamchi yaadi dakhav':'कीवो, प्रिया मॅडमची यादी दाखव',
+  'Kivo, Yogesh bhau ko udhaar de sakte hain?':'कीवो, योगेश भाऊ को उधार दे सकते हैं?','Kivo, Yogesh bhau la udhaari deu ka?':'कीवो, योगेश भाऊला उधारी देऊ का?',
+  'Kivo, Amul doodh ke 40 packet aaye':'कीवो, अमूल दूध के 40 पैकेट आए','Joshi ji ka order pack ho gaya':'जोशी जी का ऑर्डर पैक हो गया',
+  'Kivo, Yogesh bhau ke khate mein 340 likho':'कीवो, योगेश भाऊ के खाते में 340 लिखो','Kivo, Kulkarni kakunni 500 dile':'कीवो, कुलकर्णी काकूंनी 500 दिले'
+};
+function tx(str){
+  if(lipi!=='dev')return str;
+  const k=str.replace(/\*\*/g,'').trim();
+  if(DEV[k])return DEV[k];
+  let m;
+  if(m=k.match(/^(.+), (₹[\d,]+) udhaar add kiya\.$/))return `${tx(m[1])}, ${m[2]} उधार ऐड किया।`;
+  if(m=k.match(/^(.+), (₹[\d,]+) udhaari lihili\.$/))return `${tx(m[1])}, ${m[2]} उधारी लिहिली.`;
+  if(m=k.match(/^(.+), (₹[\d,]+)\? Sahi hai\?$/))return `${tx(m[1])}, ${m[2]}? सही है?`;
+  if(m=k.match(/^(.+), (₹[\d,]+)\? Barobar aahe\?$/))return `${tx(m[1])}, ${m[2]}? बरोबर आहे?`;
+  return str;
+}
+// text that re-renders when the presenter switches lipi
+const lbl=src=>`<span data-src="${src}">${tx(src)}</span>`;
+function retranslate(){document.querySelectorAll('[data-src]').forEach(e=>e.textContent=tx(e.dataset.src))}
 
 /* ---------------- orb engine ---------------- */
 const orbs=[];let voice='idle',voiceSrc=null;
@@ -546,7 +663,7 @@ function setVoice(st,src=null){
   voice=st;voiceSrc=src;device.dataset.voice=st;
   dock.classList.toggle('active',st!=='idle'&&st!=='passive'&&src==='dock');
   dock.classList.toggle('passive',st==='passive');
-  if(st==='idle')$('#dLine').textContent=T(SCRIPTS[0].said);
+  if(st==='idle')$('#dLine').textContent=tx(T(SCRIPTS[0].said));
 }
 
 /* ---------------- audio ---------------- */
@@ -554,7 +671,7 @@ let actx;
 function cue(kind){
   if(!sound)return;
   try{actx=actx||new (window.AudioContext||window.webkitAudioContext)();
-    const seq={listen:[[660,.07],[990,.09]],ok:[[880,.07],[1320,.12]],undo:[[520,.08],[360,.12]]}[kind];
+    const seq={listen:[[660,.07],[990,.09]],ok:[[880,.07],[1320,.12]],undo:[[520,.08],[360,.12]],warn:[[440,.12],[440,.14],[330,.18]]}[kind];
     let t=actx.currentTime;
     for(const [f,d] of seq){const o=actx.createOscillator(),g=actx.createGain();o.type='sine';o.frequency.value=f;
       g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.14,t+.01);g.gain.exponentialRampToValueAtTime(.001,t+d);
@@ -596,14 +713,14 @@ function toast(visual,text){
 
 /* ---------------- home: one moment at a time ---------------- */
 function renderPager(){
-  $('#pager').innerHTML=MOMENTS.map((m,i)=>`<button class="pg${i===mi?' on':''}" data-m="${i}">${m.thumb()}${m.urgent&&!done.has(m.id)?'<span class="dot"></span>':''}${done.has(m.id)?`<span class="ck">${icon('check')}</span>`:''}</button>`).join('');
+  $('#pager').innerHTML=M().map((m,i)=>`<button class="pg${i===mi?' on':''}" data-m="${i}">${m.thumb()}${m.urgent&&!done.has(m.id)?'<span class="dot"></span>':''}${done.has(m.id)?`<span class="ck">${icon('check')}</span>`:''}</button>`).join('');
 }
 function renderMoment(){
-  const m=MOMENTS[mi];
-  $('#sayText').innerHTML=L(m.line).split('**').flatMap((seg,i)=>seg.split(/\s+/).filter(Boolean).map(w=>`<span class="w${i%2?' k':''}">${w}</span>`)).join(' ');
+  const m=M()[mi];
+  $('#sayText').innerHTML=tx(L(m.line)).split('**').flatMap((seg,i)=>seg.split(/\s+/).filter(Boolean).map(w=>`<span class="w${i%2?' k':''}">${w}</span>`)).join(' ');
   const a=m.act(),isDone=done.has(m.id),sb=$('#stagebox');
   sb.style.background=m.bg;
-  sb.innerHTML=m.stage()+`<button class="act${isDone?' done':''}" id="act"><span class="ai">${isDone?icon('check'):a.pic?prod(a.pic):icon(a.icon)}</span>${isDone?L({hi:'Ho gaya',mr:'Jhala'}):a.label}</button>`;
+  sb.innerHTML=m.stage()+`<button class="act${isDone?' done':''}" id="act"><span class="ai">${isDone?icon('check'):a.pic?prod(a.pic):icon(a.icon)}</span>${tx(isDone?L({hi:'Ho gaya',mr:'Jhala'}):a.label)}</button>`;
   sb.classList.remove('enter');void sb.offsetWidth;sb.classList.add('enter');
   $('#act').onclick=doAction;
   renderPager();
@@ -611,7 +728,7 @@ function renderMoment(){
 async function speakMoment(){
   const my=++runId,ws=[...document.querySelectorAll('#sayText .w')];
   setVoice('speaking','callout');
-  const dur=await speak(L(MOMENTS[mi].line));
+  const dur=await speak(L(M()[mi].line));
   if(my!==runId)return;
   const chars=ws.reduce((n,w)=>n+w.textContent.length+3,0);
   for(let i=0;i<ws.length;i++){
@@ -625,25 +742,29 @@ async function speakMoment(){
 }
 function showMoment(i,talk=true){mi=i;renderMoment();if(talk)speakMoment();else document.querySelectorAll('#sayText .w').forEach(w=>w.classList.add('on'))}
 async function doAction(){
-  const m=MOMENTS[mi];if(done.has(m.id))return;
+  const m=M()[mi];if(done.has(m.id))return;
+  if(m.id==='away'){                       // owner has seen what Rohan did
+    awayLog.length=0;cue('ok');speak(L({hi:'Ho gaya',mr:'Jhala'}));showMoment(0);return;
+  }
+  if(!P().owner)awayLog.push({vis:m.thumb(),amt:'',ic:icon('check')});
+  if(m.id==='list'&&!RESTOCK.some(r=>r.p==='rice'&&r.q==='×6'))RESTOCK.unshift({p:'rice',q:'×6',sup:'Ramesh Traders'});
   done.add(m.id);cue('ok');renderMoment();
   document.querySelectorAll('#sayText .w').forEach(w=>w.classList.add('on'));
   speak(L({hi:'Ho gaya',mr:'Jhala'}));
   await sleep(1500);
-  const next=MOMENTS.findIndex(x=>!done.has(x.id));
-  if(next>=0&&mode==='home'&&MOMENTS[mi]===m)showMoment(next);
+  const next=M().findIndex(x=>!done.has(x.id));
+  if(next>=0&&mode==='home'&&M()[mi]===m)showMoment(next);
 }
 
 function applyPerson(){
   const p=P();
-  $('#whoFace').innerHTML=face(p.f);$('#greet').textContent=p.greet;
-  const lk=$('#khataLock');lk.hidden=p.owner;lk.innerHTML=icon('lock');
+  $('#whoFace').innerHTML=face(p.f);$('#greet').textContent=tx(p.greet);
   document.querySelectorAll('#wizPeople button').forEach(b=>b.classList.toggle('on',b.dataset.p===cur));
-  $('#dLine').textContent=T(SCRIPTS[0].said);
+  $('#dLine').textContent=tx(T(SCRIPTS[0].said));
 }
 async function switchPerson(k){
-  cur=k;applyPerson();toast(face(P().f),P().name);
-  const first=MOMENTS.findIndex(x=>!done.has(x.id));
+  cur=k;applyPerson();toast(face(P().f),tx(P().name));
+  const first=M().findIndex(x=>!done.has(x.id));
   showMoment(first<0?0:first,false);
   if(mode==='home'){await sleep(800);speakMoment()}
 }
@@ -652,54 +773,72 @@ async function switchPerson(k){
 const ringSVG=()=>`<svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="13" fill="none" stroke="#E6E9EF" stroke-width="3.5"/><circle class="cd" cx="16" cy="16" r="13" fill="none" stroke="#3B5BFF" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="81.7" stroke-dashoffset="0" transform="rotate(-90 16 16)"/></svg>`;
 const okMark=()=>`<span class="st ok">${icon('check')}</span>`;
 function credit(c){
-  const owner=P().owner,el=document.createElement('div');el.className='rc credit';
-  el.innerHTML=`<div class="rc-row">${face(c.f)}<div><div class="rc-name">${c.name}</div>${owner?`<div class="rc-sub nb">Baaki ${fmt(c.prev+c.amt)}</div>`:''}</div>
+  // c.check: amount looks unusual for this customer -> don't auto-save, ask first
+  const who=cur,f=CUST[c.key],name=CNAME[c.key],prev=LEDGER[c.key]||0;
+  const el=document.createElement('div');el.className='rc credit'+(c.check?' check':'');
+  el.innerHTML=`<div class="rc-row">${face(f)}<div><div class="rc-name">${lbl(name)}</div><div class="rc-sub">${lbl('Baaki')} <span class="nb">${fmt(prev+c.amt)}</span></div></div>
    <span class="rc-amt">+${fmt(c.amt)}</span><span class="st">${ringSVG()}</span></div>
-   <div class="rc-acts"><button class="ib u">${icon('undo')}Undo</button><button class="ib e">${icon('pencil')}Badlo</button></div>
+   <div class="rc-acts"><button class="ib u">${icon('undo')}${lbl('Undo')}</button><button class="ib e">${icon('pencil')}${lbl('Badlo')}</button></div>
    <div class="alts" hidden></div>`;
   let amt=c.amt,left=5,paused=false,fin=false;
-  const cd=el.querySelector('.cd'),st=el.querySelector('.st');
-  const iv=setInterval(()=>{if(paused||fin)return;left-=.1;cd.setAttribute('stroke-dashoffset',(81.7*(1-left/5)).toFixed(1));
-    if(left<=0){fin=true;clearInterval(iv);el.classList.add('confirmed');el.querySelector('.alts').hidden=true;st.outerHTML=okMark();cue('ok')}},100);
-  el.querySelector('.u').onclick=()=>{fin=true;clearInterval(iv);el.classList.add('undone');el.querySelector('.alts').hidden=true;
-    st.className='st gone';st.innerHTML=icon('undo');cue('undo');kivoSays(T({hi:'Hata diya.',mr:'Kadhun takla.'}))};
-  el.querySelector('.e').onclick=()=>{
-    paused=true;const a=el.querySelector('.alts');a.hidden=false;setTimeout(scrollDown,0);
+  const cd=el.querySelector('.cd'),st=el.querySelector('.st'),a=el.querySelector('.alts');
+  const confirm=()=>{fin=true;clearInterval(iv);el.classList.remove('check');el.classList.add('confirmed');a.hidden=true;st.outerHTML=okMark();cue('ok');
+    LEDGER[c.key]=prev+amt;
+    if(!PEOPLE[who].owner)awayLog.push({vis:face(f),amt:'+'+fmt(amt),ic:prod('khata')})};
+  const iv=setInterval(()=>{if(paused||fin)return;left-=.1;cd.setAttribute('stroke-dashoffset',(81.7*(1-left/5)).toFixed(1));if(left<=0)confirm()},100);
+  const showAlts=()=>{
+    paused=true;a.hidden=false;setTimeout(scrollDown,0);
     a.innerHTML=c.alts.filter(v=>v!==amt).map(v=>`<button class="${v===c.hint?'hint':''}" data-v="${v}">${fmt(v)}</button>`).join('')+`<button data-v="${amt}" style="background:var(--card-2);color:var(--ink-2)">${fmt(amt)} ✓</button>`;
     a.querySelectorAll('button').forEach(b=>b.onclick=()=>{
       amt=+b.dataset.v;const am=el.querySelector('.rc-amt');am.textContent='+'+fmt(amt);am.classList.remove('flash');void am.offsetWidth;am.classList.add('flash');
-      const nb=el.querySelector('.nb');if(nb)nb.textContent='Baaki '+fmt(c.prev+amt);
-      a.hidden=true;left=5;paused=false;cue('ok');
+      el.querySelector('.nb').textContent=fmt(prev+amt);
+      kivoSays(creditLine(name,amt));
+      if(c.check)confirm();else{a.hidden=true;left=5;paused=false;cue('ok')}
     });
   };
+  el.querySelector('.u').onclick=()=>{fin=true;clearInterval(iv);el.classList.add('undone');a.hidden=true;
+    st.className='st gone';st.innerHTML=icon('undo');cue('undo');kivoSays(T({hi:'Hata diya.',mr:'Kadhun takla.'}))};
+  el.querySelector('.e').onclick=showAlts;
+  if(c.check){cue('warn');showAlts()}
+  return el;
+}
+function creditDone(key,amt){
+  const el=document.createElement('div');el.className='rc';
+  el.innerHTML=`<div class="rc-row">${face(CUST[key])}<div><div class="rc-name">${lbl(CNAME[key])}</div><div class="rc-sub">${lbl('Baaki')} ${fmt(LEDGER[key])}</div></div><span class="rc-amt">+${fmt(amt)}</span>${okMark()}</div>`;
+  return el;
+}
+function creditCheck(key,ok){
+  const el=document.createElement('div');el.className='rc';
+  el.innerHTML=`<div class="rc-row">${face(CUST[key])}<div class="rc-name">${lbl(CNAME[key])}</div><span class="verdict ${ok?'ok':'ask'}">${icon(ok?'check':'x')}</span></div>
+   <div class="facts2"><span>${prod('khata')}${fmt(LEDGER[key])}</span><span>${prod('cash')}${lbl('1 tareekh')}</span></div>`;
   return el;
 }
 function disambig(amt,cands){
   const el=document.createElement('div');el.className='rc';
-  el.innerHTML=`<div class="cands">`+cands.map((c,i)=>`<button class="cand" data-i="${i}">${face(c.f)}<span class="tagline">${icon(c.ic)}${c.tag}</span></button>`).join('')+`</div>`;
+  el.innerHTML=`<div class="cands">`+cands.map((c,i)=>`<button class="cand" data-i="${i}">${face(CUST[c.key])}<span class="tagline">${icon(c.ic)}${c.tag}</span></button>`).join('')+`</div>`;
   el.querySelectorAll('.cand').forEach(b=>b.onclick=()=>{
-    el.replaceWith(credit({...cands[+b.dataset.i],amt,alts:[314,3400]}));cue('ok');kivoSays(T({hi:'Likh liya.',mr:'Lihun ghetla.'}));
+    el.replaceWith(credit({key:cands[+b.dataset.i].key,amt,alts:[314,3400]}));cue('ok');kivoSays(creditLine('Sharma ji',amt));
   });
   return el;
 }
 function itemCard(p,name,amt){
   const el=document.createElement('div');el.className='rc';
-  el.innerHTML=`<div class="rc-row">${prod(p)}<div class="rc-name">${name}</div><span class="rc-amt" style="font-size:23px">${amt}</span>${okMark()}</div>`;
+  el.innerHTML=`<div class="rc-row">${prod(p)}<div class="rc-name">${lbl(name)}</div><span class="rc-amt" style="font-size:23px">${amt}</span>${okMark()}</div>`;
   return el;
 }
 function personCard(f,name,via){
   const el=document.createElement('div');el.className='rc';
-  el.innerHTML=`<div class="rc-row">${face(f)}<div class="rc-name">${name}</div><span style="margin-left:auto;color:var(--wa)">${icon(via)}</span>${okMark()}</div>`;
+  el.innerHTML=`<div class="rc-row">${face(f)}<div class="rc-name">${lbl(name)}</div><span style="margin-left:auto;color:var(--wa)">${icon(via)}</span>${okMark()}</div>`;
   return el;
 }
 function payCard(f,name,amt){
   const el=document.createElement('div');el.className='rc';
-  el.innerHTML=`<div class="rc-row">${face(f)}<div><div class="rc-name">${name}</div>${P().owner?'<div class="rc-sub">Baaki ₹0</div>':''}</div><span class="rc-amt pay">−${fmt(amt)}</span>${okMark()}</div>`;
+  el.innerHTML=`<div class="rc-row">${face(f)}<div><div class="rc-name">${lbl(name)}</div><div class="rc-sub">${lbl('Baaki')} ₹0</div></div><span class="rc-amt pay">−${fmt(amt)}</span>${okMark()}</div>`;
   return el;
 }
 function listCard(){
   const el=document.createElement('div');el.className='rc';
-  el.innerHTML=`<div class="rc-row">${face(CUST.priya)}<div class="rc-name">Priya madam</div><span class="time" style="height:46px;font-size:16px;background:var(--card-2)">${icon('clock')}Kal 10:00</span></div>
+  el.innerHTML=`<div class="rc-row">${face(CUST.priya)}<div class="rc-name">${lbl('Priya madam')}</div><span class="time" style="height:46px;font-size:16px;background:var(--card-2)">${icon('clock')}${lbl('Kal 10:00')}</span></div>
    <div class="mini-grid">${LIST.slice(0,6).map(([p,,s])=>`<span class="${s==='out'?'out':''}">${prod(p)}</span>`).join('')}</div>`;
   return el;
 }
@@ -708,12 +847,12 @@ function listCard(){
 function addDivider(txt){thread.insertAdjacentHTML('beforeend',`<div class="divider">${txt}</div>`)}
 function addUser(k,text,live){
   const el=document.createElement('div');el.className='msg user'+(live?' live':'');
-  el.innerHTML=`<div class="bubble">${text}</div>${face(PEOPLE[k].f)}`;
+  el.innerHTML=`<div class="bubble">${text?lbl(text):''}</div>${face(PEOPLE[k].f)}`;
   thread.appendChild(el);scrollDown();return el;
 }
 function addKivo(text,card){
   const el=document.createElement('div');el.className='msg kivo';
-  el.innerHTML=`<div class="orb"></div><div class="kv"><div class="bubble">${text}</div></div>`;
+  el.innerHTML=`<div class="orb"></div><div class="kv"><div class="bubble">${lbl(text)}</div></div>`;
   makeOrb(el.querySelector('.orb'),{live:false});
   if(card)el.querySelector('.kv').appendChild(card);
   thread.appendChild(el);scrollDown();return el;
@@ -723,30 +862,51 @@ function scrollDown(){requestAnimationFrame(()=>thread.scrollTop=thread.scrollHe
 function seed(){for(const h of HISTORY){if(h.div)addDivider(h.div);else if(h.who)addUser(h.who,h.text);else addKivo(h.kivo,h.card())}}
 
 /* ---------------- modes ---------------- */
+const PANELS={
+  khata:{title:'Khata',body:()=>{
+    const rows=Object.entries(LEDGER).filter(([,v])=>v>0).sort((a,b)=>b[1]-a[1]);
+    const total=rows.reduce((n,[,v])=>n+v,0);
+    return `<div class="total" style="background:var(--pink)">${prod('khata')}${fmt(total)}</div>
+      <div class="kgrid">${rows.map(([k,v])=>`<div class="kc">${face(CUST[k])}<div class="kn">${lbl(CNAME[k])}</div><div class="kb">${fmt(v)}</div></div>`).join('')}</div>`}},
+  restock:{title:'Re-Stock',body:()=>{
+    const by={};RESTOCK.forEach(r=>(by[r.sup]=by[r.sup]||[]).push(r));
+    return Object.entries(by).map(([sup,items])=>`<div class="sup"><div class="sup-h">${prod('truck')}${sup}</div>
+      <div class="sup-row">${items.map(r=>`<span>${prod(r.p)}${r.q}</span>`).join('')}</div></div>`).join('')}},
+  tx:{title:'Transactions',body:()=>`<div class="total" style="background:var(--mint)">${prod('cash')}₹4,280</div>
+      <div class="txg"><div class="txc" style="background:var(--butter)">${prod('cash')}₹1,540</div>
+      <div class="txc" style="background:var(--sky)">${icon('phone')}₹2,740</div></div>
+      <div class="txc" style="background:var(--card-2);flex-direction:row;align-items:center">${prod('khata')}38 ${lbl('bill')}</div>`}
+};
 function setMode(m){
-  mode=m;screenEl.classList.toggle('chat-mode',m==='chat');
+  mode=m;
+  screenEl.classList.toggle('full',m!=='home');screenEl.classList.toggle('mode-chat',m==='chat');screenEl.classList.toggle('mode-panel',!!PANELS[m]);
+  if(PANELS[m]){$('#panelTtl').innerHTML=lbl(PANELS[m].title);$('#panelBody').innerHTML=PANELS[m].body()}
   document.querySelectorAll('.nav').forEach(n=>n.classList.toggle('active',n.dataset.nav===m));
   if(m==='chat')setTimeout(scrollDown,450);
 }
+const queue=[];
 async function runScript(s){
-  if(busy)return;busy=true;const my=++runId;
+  if(busy){queue.push(s);toast(icon('clock'),tx('Ek second…'));return}   // rush: never drop a "Kivo…"
+  busy=true;const my=++runId;
   if(mode!=='chat'){setMode('chat');await sleep(550)}
   if(!nowDivider){addDivider('3:06 pm');nowDivider=true}
-  const said=T(s.said),words=said.split(' ');
+  const said=T(s.said),words=tx(said).split(' ');
   setVoice('listening','dock');cue('listen');
-  const bubble=addUser(cur,'',true),b=bubble.querySelector('.bubble');
+  const bubble=addUser(cur,'',true),b=bubble.querySelector('.bubble');b.dataset.src=said;
   $('#dLine').textContent='';
   await sleep(450);
   for(let i=0;i<words.length;i++){const txt=words.slice(0,i+1).join(' ');b.textContent=txt;$('#dLine').textContent=txt;scrollDown();await sleep(150+Math.random()*90)}
   await sleep(350);bubble.classList.remove('live');
   setVoice('thinking','dock');await sleep(900);
-  const reply=T(s.reply);
-  setVoice('speaking','dock');$('#dLine').textContent=reply;
-  addKivo(reply,s.card());cue('ok');
+  const reply=typeof s.reply==='function'?s.reply():T(s.reply);
+  setVoice('speaking','dock');$('#dLine').textContent=tx(reply);
+  const card=s.card();addKivo(reply,card);if(!card.classList.contains('check'))cue('ok');
+  if(s.log&&!P().owner)awayLog.push(s.log());
   const dur=await speak(reply);
   await sleep(dur?dur+500:1400+reply.length*45);
   if(my===runId)setVoice('idle');
   busy=false;
+  if(queue.length)runScript(queue.shift());
 }
 
 // Someone talks at the counter without saying "Kivo": it hears, but stays quiet.
@@ -762,7 +922,8 @@ function init(){
   document.querySelectorAll('[data-p]').forEach(el=>el.innerHTML=prod(el.dataset.p));
   document.querySelectorAll('[data-orb=static]').forEach(e=>makeOrb(e,{live:false}));
   makeOrb($('#heroOrb'),{src:'callout'});makeOrb($('#dockOrb'),{src:'dock'});
-  seed();
+  awayLog.push({vis:face(CUST.joshi),amt:'',ic:icon('wa')},{vis:face(CUST.yogesh),amt:'+₹340',ic:prod('khata')});
+  seed();retranslate();
   $('#bars').innerHTML='<i></i>'.repeat(7);bars=[...document.querySelectorAll('#bars i')];
 
   $('#wizPeople').innerHTML=Object.entries(PEOPLE).map(([k,p])=>`<button data-p="${k}">${p.name}</button>`).join('');
@@ -770,7 +931,7 @@ function init(){
   $('#wizCmds').innerHTML=SCRIPTS.map((s,i)=>`<button class="cmd" data-s="${i}"><kbd>${s.key}</kbd>${s.label}</button>`).join('');
   $('#wizCmds').onclick=e=>{const b=e.target.closest('button');if(b)runScript(SCRIPTS[+b.dataset.s])};
   const replay=()=>{setMode('home');showMoment(mi)};
-  const next=()=>{setMode('home');showMoment((mi+1)%MOMENTS.length)};
+  const next=()=>{setMode('home');showMoment((mi+1)%M().length)};
   $('#wizCallout').onclick=replay;$('#wizNext').onclick=next;
   const toggleSound=()=>{sound=!sound;$('#wizSound').textContent='Sound: '+(sound?'on':'off');
     const sb=$('#soundBtn');sb.classList.toggle('on',sound);sb.innerHTML=icon(sound?'vol':'volx');if(sound)cue('ok')};
@@ -779,11 +940,13 @@ function init(){
   $('#pager').onclick=e=>{const b=e.target.closest('.pg');if(b)showMoment(+b.dataset.m)};
   $('#replay').onclick=()=>showMoment(mi);
   $('#simMic').onclick=()=>runScript(SCRIPTS[0]);$('#simChat').onclick=chatter;
-  $('#back').onclick=()=>setMode('home');
+  $('#back').onclick=()=>setMode('home');$('#back2').onclick=()=>setMode('home');
+  $('#qaRestock').onclick=()=>setMode('restock');$('#qaTx').onclick=()=>setMode('tx');$('#qaKhata').onclick=()=>setMode('khata');
+  $('#wizLipi').onclick=()=>{lipi=lipi==='dev'?'roman':'dev';$('#wizLipi').textContent='Lipi: '+(lipi==='dev'?'देवनागरी':'Roman');
+    retranslate();applyPerson();renderMoment();document.querySelectorAll('#sayText .w').forEach(w=>w.classList.add('on'));if(PANELS[mode])setMode(mode)};
   $('#who').onclick=()=>{const ks=Object.keys(PEOPLE);switchPerson(ks[(ks.indexOf(cur)+1)%ks.length])};
   document.querySelectorAll('.nav').forEach(n=>n.onclick=()=>{const k=n.dataset.nav;if(k==='home'||k==='chat')setMode(k)});
-  $('#qaKhata').onclick=()=>{if(!P().owner)toast(icon('lock'),'Sirf malik')};
-
+  
   document.addEventListener('keydown',e=>{
     if(e.code==='Space'){e.preventDefault();runScript(SCRIPTS[0])}
     else if(e.key==='Escape')setMode('home');

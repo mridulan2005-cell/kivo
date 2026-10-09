@@ -13,10 +13,10 @@ Open http://localhost:8770 (a wide window leaves room for the presenter controls
 ## Presenter controls (outside the device)
 
 - **Space** / big mic: someone says “Kivo…” (runs command 1)
-- **1–5**: pick what Kivo heard (4 plants a 15→50 mishearing)
+- **1–6**: pick what Kivo heard (4 plants a 15→50 mishearing, Kivo asks before saving; 6 is Rohan's credit check). Commands said while Kivo is busy are queued
 - **B**: background talk; Kivo hears but stays quiet
 - **L** replay, **N** next moment, **Esc** home, **H** hide controls
-- Wizard panel: switch who is at the counter (Sandeep / Aai / Ravi-helper)
+- Wizard panel: switch who is at the counter (Sandeep and Aai are owners; Rohan is the son: sees everything, and Kivo shows his work to the owner when they return). **Lipi** toggles on-screen text between Devanagari and Roman
 
 ## Voice
 
