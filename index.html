@@ -11,7 +11,7 @@
 :root{
   --screen:#F4F5FB; --card:#FFFFFF; --card-2:#F4F5FA; --card-3:#ECEEF5;
   --line:rgba(15,23,42,.07); --ink:#14172B; --ink-2:#4A5068; --ink-3:#9AA0B4;
-  --rail:#3B4FD8; --blue:#3B5BFF; --blue-soft:#E7ECFF; --green:#12B76A; --green-soft:#DDF6E9;
+  --primary:#5B5BC2; --primary-soft:#F3EAF5; --pinkbtn:#E7B6D2; --blue:#3B5BFF; --blue-soft:#E7ECFF; --green:#12B76A; --green-soft:#DDF6E9;
   --amber:#F2A100; --red:#EF4433; --violet:#7A5AF8; --wa:#22C35E;
   /* pastel card fills (from the reference) */
   --peach:#FFE4D6; --mint:#D6F4EE; --pink:#FFDDE6; --lav:#E6E1FF; --sky:#DCEEFF; --butter:#FFF1C9;
@@ -49,15 +49,16 @@ svg.i{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke
 @keyframes sweep{from{transform:translateX(-100%)}to{transform:translateX(240%)}}
 
 /* ---------- rail: solid blue, icons only ---------- */
-.rail{width:92px;flex:none;background:var(--rail);border-radius:30px;display:flex;flex-direction:column;align-items:center;padding:20px 0;gap:14px;box-shadow:0 14px 30px rgba(59,79,216,.28)}
+.rail{width:92px;flex:none;background:#fff;border-radius:30px;display:flex;flex-direction:column;align-items:center;padding:20px 0;gap:14px;box-shadow:var(--shadow)}
 .brand{margin-bottom:22px}
-.nav{width:60px;height:60px;border:0;border-radius:20px;background:transparent;color:rgba(255,255,255,.75);display:grid;place-items:center;position:relative;transition:background .25s,color .25s}
+.nav{width:60px;height:60px;border:0;border-radius:20px;background:transparent;color:var(--ink-3);display:grid;place-items:center;position:relative;transition:background .25s,color .25s}
 .nav svg.i{width:27px;height:27px}
-.nav.active{background:#fff;color:var(--rail);box-shadow:0 8px 18px rgba(10,20,90,.25)}
-.badge{position:absolute;top:10px;right:10px;width:13px;height:13px;border-radius:50%;background:#FF5A6E;border:2.5px solid var(--rail)}
-.nav.active .badge{border-color:#fff}
+.nav.active{background:var(--primary-soft);color:var(--primary)}
+/* active marker on the rail's edge, as in the reference */
+.nav.active::after{content:"";position:absolute;right:-16px;top:12px;bottom:12px;width:4px;border-radius:4px;background:var(--primary)}
+.badge{position:absolute;top:10px;right:10px;width:13px;height:13px;border-radius:50%;background:#FF5A6E;border:2.5px solid #fff}
 .who{margin-top:auto;border:0;background:none;padding:0;position:relative}
-.who .face{width:62px;height:62px;display:block;box-shadow:0 0 0 3px var(--rail),0 0 0 6px #5BE3A0;border-radius:20px}
+.who .face{width:62px;height:62px;display:block;box-shadow:0 0 0 3px #fff,0 0 0 6px #5BE3A0;border-radius:20px}
 
 /* ---------- main ---------- */
 .main{flex:1;min-width:0;display:flex;flex-direction:column}
@@ -134,17 +135,17 @@ svg.i{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke
 .fact .fi{width:62px;height:62px;border-radius:20px;background:#fff;display:grid;place-items:center;color:var(--ink-2)}
 .fact .fi svg.prod{width:48px;height:48px}
 
-.act{height:76px;border:0;border-radius:24px;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;gap:14px;
+.act{height:76px;border:0;border-radius:24px;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;gap:14px;box-shadow:0 12px 26px rgba(91,91,194,.3);
   font-size:23px;font-weight:700;padding:0 30px 0 11px;align-self:center;min-width:380px;transition:background .3s,transform .2s}
 .act:active{transform:scale(.97)}
-.act .ai{width:56px;height:56px;border-radius:18px;background:#fff;display:grid;place-items:center;color:var(--ink)}
+.act .ai{width:56px;height:56px;border-radius:18px;background:#fff;display:grid;place-items:center;color:var(--primary)}
 .act .ai svg.prod{width:44px;height:44px}
 .act.done{background:var(--green)}
 .act.done .ai{color:var(--green)}
 
 .pager{display:flex;justify-content:center;gap:16px}
 .pg{width:64px;height:64px;border-radius:20px;border:0;padding:0;background:var(--card-2);display:grid;place-items:center;position:relative;transition:transform .25s,box-shadow .25s,opacity .25s;opacity:.5}
-.pg.on{opacity:1;box-shadow:0 0 0 3px #fff,0 0 0 6px var(--blue);transform:scale(1.06)}
+.pg.on{opacity:1;box-shadow:0 0 0 3px #fff,0 0 0 6px var(--primary);transform:scale(1.06)}
 .pg .face{width:64px;height:64px}
 .pg svg.prod{width:64px;height:64px;padding:8px;background:var(--peach);border-radius:20px}
 .pg .dot{position:absolute;top:-4px;right:-4px;width:18px;height:18px;border-radius:50%;background:var(--red);border:3px solid #fff}
@@ -206,9 +207,10 @@ body.tent-on #stage{opacity:0;pointer-events:none}
   background:linear-gradient(150deg,#FFFFFF 0%,#ECEEF3 38%,#D3D7E0 100%);box-shadow:0 40px 80px rgba(20,25,60,.18),0 10px 20px rgba(20,25,60,.08),inset 0 1px 0 #fff}
 .ldev::before{content:"";position:absolute;top:6px;left:50%;width:7px;height:7px;margin-left:-3.5px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#5a6070,#14161b)}
 .lscreen{width:100%;height:100%;border-radius:32px;background:var(--screen);display:flex;gap:16px;padding:16px;overflow:hidden}
-.crail{width:84px;flex:none;background:var(--rail);border-radius:26px;display:flex;flex-direction:column;align-items:center;padding:18px 0;gap:12px}
-.crail .face{margin-top:auto;width:56px;height:56px;border-radius:18px;box-shadow:0 0 0 3px var(--rail),0 0 0 5.5px #5BE3A0}
+.crail{width:84px;flex:none;background:#fff;box-shadow:var(--shadow);border-radius:26px;display:flex;flex-direction:column;align-items:center;padding:18px 0;gap:12px}
+.crail .face{margin-top:auto;width:56px;height:56px;border-radius:18px;box-shadow:0 0 0 3px #fff,0 0 0 5.5px #5BE3A0}
 .crail .nav{width:54px;height:54px}
+.crail .nav.active::after{right:-15px}
 .cmain{flex:1;min-width:0;display:flex;flex-direction:column;gap:14px}
 .chead{display:flex;align-items:center;gap:14px;height:60px;flex:none}
 .chead .face{width:58px;height:58px}
@@ -247,7 +249,7 @@ body.tent-on #stage{opacity:0;pointer-events:none}
 .btn2:active{transform:scale(.97)}
 .btn2 svg.prod{width:38px;height:38px}
 .btn2 svg.i{width:26px;height:26px}
-.btn2.k{background:var(--ink)} .btn2.u{background:var(--blue)} .btn2.d{background:var(--green)}
+.btn2.k{background:var(--primary)} .btn2.u{background:var(--pinkbtn);color:#4A2A63} .btn2.d{background:var(--green)}
 
 /* ---------- chat view ---------- */
 .ch-top{display:flex;align-items:center;gap:14px;margin-bottom:4px}
@@ -332,7 +334,7 @@ body.tent-on #stage{opacity:0;pointer-events:none}
 #sim{position:fixed;right:22px;bottom:22px;z-index:100;display:flex;flex-direction:column;align-items:center;gap:10px;transition:opacity .3s}
 #sim.hidden{opacity:0;pointer-events:none}
 #sim button{border:0;border-radius:50%;display:grid;place-items:center;color:#fff;box-shadow:0 10px 26px rgba(20,25,60,.25)}
-#simMic{width:76px;height:76px;background:var(--rail)}
+#simMic{width:76px;height:76px;background:var(--primary)}
 #simMic svg.i{width:32px;height:32px}
 #simChat{width:52px;height:52px;background:#fff!important;color:var(--ink-2)!important}
 #sim span{font-size:12px;font-weight:600;color:var(--ink-2);background:rgba(255,255,255,.75);padding:4px 10px;border-radius:999px;backdrop-filter:blur(8px)}
